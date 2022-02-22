@@ -90,6 +90,8 @@ create table FuseHouse(
 );
 go
 
+
+
 --C# Selects
 select Device.descr, Household.phase, Household.power
 from Device join HouseHold on Device.dev_id = Household.device

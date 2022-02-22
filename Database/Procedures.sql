@@ -116,9 +116,75 @@ as
 	  end
   end;
 go
-exec roomList 1,1;
 
+
+
+create procedure insertHousehold(@devId int, @descr varchar(32), @power int, @phase int)
+as
+	begin
+	  if exists (select * from device d where d.dev_id = @devId)
+	    begin
+		   raiserror('Das Gerät %d befindet sich bereits in der Datenbank',16,3,@devId);
+		end;
+	  else
+	    begin
+		  insert into device values(@devId, @descr);
+		  insert into HouseHold values(@devId, @power, @phase);
+		end
+  	end;
+go
+
+create procedure insertSocket(@devId int, @descr varchar(32), @type varchar(32), @phase int)
+as
+	begin
+	  if exists (select * from device d where d.dev_id = @devId)
+	    begin
+		   raiserror('Das Gerät %d befindet sich bereits in der Datenbank',16,3,@devId);
+		end;
+	  else
+	    begin
+		  insert into device values(@devId, @descr);
+		  insert into Socket values(@devId, @power, @phase);
+		end
+  	end;
+go
+
+create procedure deleteDevice(@devId int)
+as
+  begin
+	if not exists (select * from device where dev_id = @devId)
+	  begin
+	    raiserror('Gerät %d nicht in der Datenbank',16,3,@devId);
+	  end
+	else 
+	  begin
+	    if exists(select * from HouseHold where device = @devId)
+		  begin
+			delete from HouseHold where device = @devId;
+		  end;
+		else if exists(select * from socket where device = @devId)
+		  begin
+		    delete from socket where device = @devId;
+		  end;
+		  delete from device where dev_id = @devId;
+		end
+  end;
+  go
+
+  exec insertHousehold 30,'test',10,10;
+  select * from HouseHold;
+  exec deleteDevice 30;
+  select * from HouseHold;
+
+
+
+
+/*
 drop procedure roomList;
 drop procedure HouseHoldList;
 drop procedure socketList;
 drop procedure fuseList;
+drop procedure insertHousehold;
+drop procedure insertScoket;
+drop procedure deleteDevice;
+*/

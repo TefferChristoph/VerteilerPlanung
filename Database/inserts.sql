@@ -1,20 +1,19 @@
 
 
-insert into house(house_id, adress,zip,city,floors) values
+insert into house(house_id,adress,zip,city,floors) values
 	(1,'Haupstraße 37','1090','Wien',2),
 	(2,'Berggasse 19','7210','Mattersurg',1),
 	(3,'Bahnstraße 15','7222','Rohrbach',1),
 	(4,'Wienerstraße 102','2700','Wiener Neustadt',3),
 	(5,'Theatergasse 55','1190','Wien',1),
 	(6,'Haupstraße 37','2700','Wiener Neustadt',2),
-	(7,'njaaaaaaaaaaaaaaaaaaaaaaa','2700','Wiener Neustadt',2),
+	(7,'teststrasse','2700','Wiener Neustadt',2),
 	(8,'abcde','2700','Wiener Neustadt',2),
-	(9,'def','123','hak',3)
+	(9,'def','1234','Stadt',3)
 ;
 
-insert into house(house_id, adress,zip,city,floors) values(100,'ttt','1234','ffffff',3);
-
 go
+
 
 insert into room(house_id, roomNr,floorNr,descr) values
 	--House 1
