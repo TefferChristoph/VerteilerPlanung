@@ -1,0 +1,57 @@
+\chapter{Integration with Other Museums (FM)}
+\label{cha:Integration with Other Museums}
+
+In order to expand our collection of exhibits and provide visitors with the ability to gain insights into other virtual museums, we have decided to connect and embed other museums. In this chapter, we analyse the external partners or museums and consider use cases for their integration.
+
+\section{European, Latin America and Caribbean Museums} \label{EULAC}
+
+
+The EU-LAC Foundation is one of the closest and most valuable partner organisations, since they also received funding from the European Union\footnote{\url{https://eulacfoundation.org/en/about-us}}. The project is an international cooperation between Latin American, Caribbean and European countries and was established in 1999. They collectively operate a virtual online museum\footnote{\url{https://eulacmuseums.net/}}(furthermore in the thesis occasionally referred as "EULAC" only) and were funded by Erasmus to maintain it\footnote{\url{https://eulacmuseums.net/index.php/partnership-2}}. The museum is developed and mainly led by the British University of St Andrews, which implemented the following features on the website:
+
+\begin{itemize} 
+\item Users are able to browse a database of traditional museums that are part of the EULAC project, and receive in-depth details for each museum, but only in the official language of the item. This is the reason that major parts of this collection are in Spanish.\footnote{\url{https://eulacmuseums.net/index.php/resources/database/museums-database}}
+\item Users are able to find various types of publications published through EULAC using a bibliography directory\footnote{\url{https://eulacmuseums.net/index.php/resources/database/bibliography}}. Many of the works that have been published there concern the project itself and are less intended for the general public.
+    \item Users are able to view hundreds of exhibits in photos or 3D objects on their website.\footnote{\url{https://eu-lac.org/galleries/}} These models and photos maintain a high level of detail and quality.
+    \item Visitors of the EULAC museum are able to take numerous 3D tours through different places in the world, including museums, landscapes and other exciting locations\footnote{\url{https://eu-lac.org/galleries/virtualTour.php}}.
+    \item A very intuitive way of navigation provided by the EU-LAC website is a world map view\footnote{\url{https://eu-lac.org/virtual-museums/}}. On this map, visitors see markers of places to view museums with exhibits or unusual places that can be discovered in a 3D tour. This type of navigation was proposed in \ref{target_condition} and defined as a requirement by our client.
+\end{itemize}
+
+\noindent The EULAC website contains many aspects that we defined in \ref{target_condition}, which is the reason it can be considered as a role model.
+
+\subsection{Use Cases}
+
+Some of the platform aspects, like the virtual tours, could be embedded and linked to our virtual museum. We have not been able to identify any public API that allows us to query data or content of EULAC. Since the organisation relies for the majority of its resources on public providers to host the exhibits, they transfer their rights to these providers in some cases and thus indirectly allow us to use the content.
+
+In the following section, we discuss some of the resources created and used by EULAC and evaluate, how an integration with Wordpress would be possible for our virtual museum. The majority of the exhibits can be displayed by embedding external websites and platforms, which often provide a RESTful API or ideally Wordpress plugins.
+
+\subsubsection{3D Tours}
+
+EULAC uses the established and cost-effective provider Roundme.com to provide its 3D tours and 360° photography\footnote{\url{https://roundme.com/@eulac3d}}. The platform does not offer its own Wordpress plugin, nor does it support available and tested 3D/360° plugins. Furthermore, Roundme does not offer an official RESTful API, making embedding only possible via IFrames. The integration via the iframes would therefore be controlled by a self-developed plugin.
+
+In the official Roundme Terms and Conditions, the user agrees to keep the copyright on his content, but allows public use and distribution to third parties as long as the work itself is public\footnote{\url{https://roundme.com/static/terms}}. Therefore we are allowed to embed 3D tours without explicit consent of EULAC. 
+
+
+\subsubsection{3D Models}
+
+EULAC has published over 178 unique 3D models on the Sketchfab platform\footnote{\url{https://sketchfab.com/eu-lac-3D}}. This platform is a marketplace for offering and selling virtual designs. EULAC, in turn, uses it to display and embed the exhibits online for free. 
+
+The platform offers an open-source Wordpress plugin for embedding and displaying Sketchfab 3D models, enabling us to extend our virtual museum with a powerful displaying tool\footnote{\url{https://de.wordpress.org/plugins/sketchfab-oembed/}}. Thus, the management of the models can be controlled by a self-developed plugin, but does not have to be. Authors are able to directly use the URL of a Sketchfab content in a post, and the plugin embeds the viewer at exactly that location in the post (Fig.: \ref{fig::wp_sketchfab}). 
+
+When users publish 3D models on Sketchfab, the authors retain all rights and copyright. Also, when uploading, the user chooses a license, which we have to abide by if we download the model - what we don't do: we merely display the exhibit on our website. When uploading an exhibit, the author grants third-party developers the permission to display content through the use of the API, as long as it is in accordance with Sketchfabs Terms of Use\footnote{\url{https://sketchfab.com/terms}}.
+
+
+
+\subsubsection{Wikipedia}
+
+The virtual museum of EULAC often references resources and articles from Wikipedia. There are numerous Wordpress plugins to embed Wikipedia, but especially the plugin "Wikilookup" by Moriel Schottlender seems to be the most fitting in our research\footnote{\url{https://de.wordpress.org/plugins/wikilookup/}}. This plugin is completely free of charge and enables authors to make terms or components hoverable. If the visitor of our virtual museum, for example, hovers over a word with the mouse that has been linked to Wikipedia, a popup appears, showing a short summary of the Wikipedia article and gives the user the ability to continue reading. 
+
+
+\subsection{Further Approach}
+
+The museum of the European Union, Latin America and Caribbean Foundation offers countless valuable and highly interesting exhibits, which we are able to embed relatively well with the evaluated toolkit. A cooperation with the Foundation would offer us even more possibilities and eventually enable us to integrate the EULAC MUSEUM seamlessly into our virtual museum. 
+
+\section{The National Museum of Computing}
+
+As mentioned in \ref{examples_of_virt_museums}, the British National Museum of Computing maintains an online presence that allows visitors to take 3D tours through the museum, view images of exhibits interactively and read in-depth stories and background information about exhibits\footnote{\url{https://tnmoc.org}}. A partnership with this institution would be advisable in our eyes, since we are impressed by this museum and consider a participation as an enrichment.
+
+The museum uses the tool Matterport for the 3D tours, whereby a plugin exists in the official Wordpress plugin repository\footnote{\url{https://de.wordpress.org/plugins/shortcode-gallery-for-matterport-showcase/}}. Content published with this tool is allowed to be embedded and displayed on external websites using the Matterport Viewer\footnote{\url{https://matterport.com/de/terms-of-use}}.

@@ -13,7 +13,7 @@ as
 	else if(@room = -1)
 	  begin
 	    
-		select r.descr, ISNULL(d.descr,'kein Geraet'), coalesce(hh.power * dr.number,0) as Power, coalesce(dr.number,0)
+		select r.descr as Raum, ISNULL(d.descr,'kein Geraet') as Geraet, coalesce(hh.power * dr.number,0) as Power, coalesce(dr.number,0) as number
 		  from room r left join 
 			   DeviceRoom dr on r.roomNr = dr.roomNr left join
 			   Device d on dr.dev_id = d.dev_id left join
@@ -29,7 +29,7 @@ as
 	  end
 	else
 	  begin
-	    select r.descr, d.descr, hh.power * dr.number as Power, dr.number
+	    select r.descr as Raum, d.descr as Geraet, hh.power * dr.number as Power, dr.number
 	    from room r join
 	      DeviceRoom dr on dr.house_id = r.house_id and 
 		                   dr.roomNr = r.roomNr join
@@ -56,7 +56,7 @@ as
 	else if(@room = -1)
 	  begin
 	    
-		select r.descr, ISNULL(d.descr,'kein Geraet'), coalesce(s.ampere * dr.number,0) as Ampere, coalesce(dr.number,0)
+		select r.descr as Raum, ISNULL(d.descr,'kein Geraet') as Geraet, coalesce(s.ampere * dr.number,0) as Ampere, coalesce(dr.number,0) as number
 			from room r left join
 				 DeviceRoom dr on dr.house_id = r.house_id and 
 								  dr.roomNr = r.roomNr left join
@@ -73,7 +73,7 @@ as
 	  end
 	else
 	  begin
-	    select r.descr, d.descr, s.ampere * dr.number as Ampere,dr.number
+	    select r.descr as Raum, d.descr as Geraet, s.ampere * dr.number as Ampere,dr.number
 		  from room r join
 	           DeviceRoom dr on dr.house_id = r.house_id and 
 		                        dr.roomNr = r.roomNr join
@@ -90,9 +90,64 @@ go
 create procedure roomList(@house int,@room int = -1)
 as
   begin
-    exec HouseHoldList @house, @room;
-	exec SocketList @house, @room;
-	
+     if not exists (select h.house_id 
+	                  from House h 
+					  where h.house_id = @house
+					)
+	  begin
+	    raiserror('Haus %d nicht in der Datenbak abgespeichert',16,1,@house);
+	  end
+	else if(@room = -1)
+	  begin
+	    --sockets
+		select r.descr as Raum, ISNULL(d.descr,'kein Geraet') as Geraet, coalesce(s.ampere * dr.number,0) as Ampere, coalesce(dr.number,0) as number
+			from room r left join
+				 DeviceRoom dr on dr.house_id = r.house_id and 
+								  dr.roomNr = r.roomNr left join
+				 Device d on d.dev_id = dr.dev_id left join
+				 Socket s on s.device = d.dev_id
+			where r.house_id = @house and not exists (select hh.device from HouseHold hh where d.dev_id = hh.device)
+
+		--union all
+
+		--houeHold
+		select r.descr as Raum, ISNULL(d.descr,'kein Geraet') as Geraet, coalesce(hh.power * dr.number,0) as Power, coalesce(dr.number,0) as number
+		  from room r left join 
+			   DeviceRoom dr on r.roomNr = dr.roomNr left join
+			   Device d on dr.dev_id = d.dev_id left join
+			   HouseHold hh on hh.device = d.dev_id
+		  where r.house_id = @house and not exists (select s.device from socket s where d.dev_id = s.device)
+	  end
+	else if not exists (select r.house_id, r.roomNr 
+	                  from room r 
+					  where r.house_id = @house and r.roomNr = @room
+					)
+	  begin
+	    raiserror('Raum %d nicht in der Datenbak abgespeichert',16,1,@room);
+	  end
+	else
+	  begin
+	    --sockets
+	    select r.descr as Raum, d.descr as Geraet, s.ampere * dr.number as Ampere,dr.number
+		  from room r join
+	           DeviceRoom dr on dr.house_id = r.house_id and 
+		                        dr.roomNr = r.roomNr join
+		       Device d on d.dev_id = dr.dev_id join
+		       Socket s on s.device = d.dev_id
+	      where r.house_id = @house and r.roomNr = @room
+		  
+		  --union all
+
+		  --household
+		  select r.descr as Raum, d.descr as Geraet, hh.power * dr.number as Power, dr.number
+		  from room r join
+	      DeviceRoom dr on dr.house_id = r.house_id and 
+		                   dr.roomNr = r.roomNr join
+		  Device d on d.dev_id = dr.dev_id join
+		  HouseHold hh on hh.device = d.dev_id
+	    where r.house_id = @house and r.roomNr = @room;
+	  end
+    
   end;
 go
 
@@ -134,7 +189,42 @@ as
   	end;
 go
 
-create procedure insertSocket(@devId int, @descr varchar(32), @type varchar(32), @phase int)
+create procedure getHouses
+  as
+    begin
+	  select house_id,zip,city,adress, floors from house order by zip;
+	end;
+go
+
+create procedure insertHouse(@adress varchar(64), @zip varchar(4), @city varchar(64), @floors int)
+as
+  begin    
+	declare @id int;
+	exec @id = getNextHouseId;
+    insert into House values(@id,@adress, @zip, @city, null, @floors);
+  end;
+ go
+
+create procedure insertRoom(@house int, @descr varchar(64), @floorNr int)
+as
+  begin    
+	declare @room_id int;
+	exec @room_id = getNextRoomId @house;
+    insert into Room values(@house, @room_id, @floorNr, @descr);
+  end;
+ go
+
+
+ create procedure getRooms(@house int)
+ as
+   begin
+     select r.roomNr, r.descr as Room from room r where r.house_id = @house order by r.roomNr;
+   end;
+go
+
+
+
+create procedure insertSocket(@devId int, @descr varchar(32),@power int, @type varchar(32), @phase int)
 as
 	begin
 	  if exists (select * from device d where d.dev_id = @devId)
@@ -171,15 +261,10 @@ as
   end;
   go
 
-  exec insertHousehold 30,'test',10,10;
-  select * from HouseHold;
-  exec deleteDevice 30;
-  select * from HouseHold;
 
-
-
-
+exec roomList 1,1;
 /*
+drop procedure getHouses;
 drop procedure roomList;
 drop procedure HouseHoldList;
 drop procedure socketList;
@@ -187,4 +272,8 @@ drop procedure fuseList;
 drop procedure insertHousehold;
 drop procedure insertScoket;
 drop procedure deleteDevice;
+drop procedure insertHouse;
+drop procedure insertRoom;
+drop procedure getHouse;
+drop procedure getRooms;
 */

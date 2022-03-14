@@ -77,3 +77,30 @@ DENY UPDATE, ALTER,SELECT,INSERT,DELETE,REFERENCES, VIEW DEFINITION, VIEW CHANGE
      TAKE OWNERSHIP,CONTROL
 	 ON [dbo].[FuseHouse] TO [VerteilerPlanung-Users]
 GO
+
+
+--Den Usern Rechte zum Ausführen von Stored Procedures
+
+use [Verteilerplanung]
+GO
+GRANT EXECUTE ON [dbo].[HouseHoldList] TO [VerteilerPlanung-Users]
+GO
+use [Verteilerplanung]
+GO
+GRANT EXECUTE ON [dbo].[roomList] TO [VerteilerPlanung-Users]
+GO
+use [Verteilerplanung]
+GO
+GRANT EXECUTE ON [dbo].[insertHousehold] TO [VerteilerPlanung-Users]
+GO
+use [Verteilerplanung]
+GO
+GRANT EXECUTE ON [dbo].[SocketList] TO [VerteilerPlanung-Users]
+GO
+use [Verteilerplanung]
+GO
+GRANT EXECUTE ON [dbo].[fuseList] TO [VerteilerPlanung-Users]
+GO
+
+
+select * from room;

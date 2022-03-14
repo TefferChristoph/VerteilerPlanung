@@ -1,0 +1,122 @@
+\chapter{Integration of Planned Features}
+\label{cha:Integration of Planned Features}
+
+To meet the requirements of the virtual museum defined in \ref{target_condition}, the finished solution must support a number of predefined functionalities. In the following chapter, some of the major features are more precisely specified, discussed and a possible implementation is outlined.
+
+\section{Social Media Integration} \label{cha:Social Media Integration}
+
+Well prior the global success of the World Wide Web, the \emph{Bulletin Board System (BBS)} was developed and distributed as early as 1978, whereby it probably counts as the oldest social network. BBS allowed users to exchange software, read news and communicate with each other. During the same year, the \emph{Multi-User Dungeon} or \emph{Multi-User Domain (MUD)} was released for the first time, allowing users to chat and role-play in a virtual world. In both networks, the entire exchange of messages was exclusively text-based. Networks like the \emph{Usenet} were published in the following years, as an extension of the BBS to exchange news and articles. In addition, the \emph{Whole Earth 'Lectronic Link} and \emph{General Electric Network for Information Exchange} were founded to exchange data with other users on a more scientific basis [\cite[pp. 3--4]{historySocialMedia}].
+
+Whether these networks and systems should be considered as social networks or not, depends on the definition. It exists no general and universal definition of social networks or social media. There are numerous approaches on how these could be defined. Equally, there is no consensus regarding the definitions and delimitation of social media and social networks [\cite[3]{socialMediaAndBusiness}].
+
+Among the largest social networks and media are Facebook, YouTube, Twitter and Instagram\footnote{\url{https://www.statista.com/statistics/272014/global-social-networks-ranked-by-number-of-users/}}, all four with rather different application purposes. Each network has the potential to attract billions of users with well-planned campaigns and on-platform features (features that are directly available in the virtual museum).
+
+\subsection{Capabilities of the Toolkit}
+
+As a result of the software evaluation which was conducted by my colleague, we have to use Wordpress as a toolkit for the implementation of the virtual museum. Due to the high modularity of Wordpress, a large number of ready-to-use plugins can be utilized to provide the following features.
+
+
+\subsection{Use Cases}
+The following section proposes major thoughts and suggestions which we consider to enrich the project through social media and networks. Some of the ideas were contributed by the popular and influential blog "Shout Me Loud"\footnote{\url{https://www.shoutmeloud.com/benefits-of-using-social-media-for-business.html}}. The majority of the following suggestions require the creation of an official account on different social platforms like Facebook, Instagram and Twitter for the virtual museum.
+
+
+\subsubsection{Sharing Exhibits} \label{social_sharing}
+
+One of the most powerful marketing tools are the active users themselves. Museum visitors should be able to share exhibits and content with their friends, family or acquaintances. To encourage users to share exhibits and make it as easy as possible, social sharing buttons should be provided on the website.
+
+According to the paper "\citetitle{LikeShare}", \cite[pp. 11--18]{LikeShare}, in which more than 420 URLs were analysed to see whether they had Share, Like and Tweet buttons and how often they were actually used, 41\% of all examined websites had a Like button, 64\% had a Share button and 68\% had a Tweet button. The paper states, that the more controversial, debatable and media-rich a website is, the higher is the probability that the website is actually shared by visitors.
+
+After careful research, we decided to use the Wordpress plugin developed and powered by AddThis\footnote{\url{https://de.wordpress.org/plugins/addthis/}}, because it is a entirely free tool, which fulfils all our expectations. AddThis is a widely used service, including more than 15 million websites\footnote{\url{https://www.addthis.com/about/}} using the complete solution acquired by Oralce\footnote{\url{https://www.addthis.com/about/oracle/}}. It allows website operators to embed share buttons, display them in different styles and formats, position them based on the website content and provide operators with detailed statistics regarding the behaviour of their visitors.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/dpa_wp_example.PNG}
+\caption{This screenshot is taken from the official Wordpress plugin browser, and shows an example blog that uses the AddThis share buttons.}
+\label{fig::cl_homepage}
+\end{figure}
+
+\subsubsection{(Autonomous and) Regular Posting of Exhibits} \label{socail_regular}
+
+Among the ways to receive attention in social networks, is the frequent posting of valuable content. One way to generate regular social media content, is to publish existing exhibits from our virtual museum on platforms such as Twitter, Facebook and Instagram. The objective is to receive maximum engagement from users, in order to attract new users and gain new visitors for the museum. Certain actions should be followed to improve the chances of success of this strategy:
+
+\begin{enumerate}
+    \item Consistency in posting frequency. According to Jon Simpson, part of the Forbes Agency Council, publishing regular content is fundamental for the success of any business trying to grow through social networking\footnote{\url{https://www.forbes.com/sites/forbesagencycouncil/2019/02/11/why-content-consistency-is-key-to-your-marketing-strategy/}}. Jon believes, that by testing out various posting frequencies and analyzing traffic data on a regular basis for weeks, is the best way to determine the ideal posting schedule. The well-known SEO and marketing specialist Neil Patel, recommends for our objective of maximum engagement, one to five posts or tweets per day\footnote{\url{https://www.forbes.com/sites/neilpatel/2016/09/12/how-frequently-you-should-post-on-social-media-according-to-the-pros/#2357596f240f}}.
+    \item In order to prevent low-quality or rather uninteresting exhibits from being published on our social media, a solution would be to prefer items with a higher number of views. Future developers of the virtual museum might implement a counter for each exhibit, how often it is visited by museum visitors. This counter could be used to determine, for example, that only those exhibits are posted on our social media that are in the higher 50\% of views.
+\end{enumerate}
+
+\noindent Ideally, the entire job should be automated in order to keep the work for the operators as low as possible. Major social networks such as Facebook, Twitter and Instagram offer SDKs (software package used to support developers building applications) for PHP, allowing future developers to implement automated posting of relevant exhibits in three steps:
+
+\begin{enumerate}
+    \item Create a PHP script, that queries our database using Wordpress, and select a random exhibit, narrowing the relevance by views.
+    \item Post the queried exhibit using social media SDKs. To maximise engagement, the post should include images, texts and details regarding the institution.
+    \item Setup an automated cron job (process that's executed periodically within Linux/Unix systems) to run the script one to five times a day.
+\end{enumerate}
+
+\noindent Alternatively, ready-made plugins for Wordpress can also be used, although querying the relevant data is more difficult since the plugin must support custom data structures. 
+
+Despite this, manual publishing has the advantage, that operators can better estimate which exhibits are currently relevant, resulting in a higher conversation rate. Some exhibits are not appropriate for all social networks, for example, if no picture is available, it is not suited for Instagram. If operators post manually, they can limit the selection of social networks depending on the exhibit.
+
+\subsubsection{Providing Support} \label{social_support}
+
+Another way, the platform could benefit from an integration of social media, would be to provide support for users. Visitors should be able to get in touch with museum operators or a dedicated support team. By maintaining a proper implementation, quick answers and professional support, a close connection between the visitor and platform can be established. In contrast, using the wrong approach might indicate a lack of professionalism for the visitor and have a negative impact on the user experience. 
+
+One way to implement this is by installing the \emph{"Smart Floating Action Buttons"} plugin, from the public Wordpress plugin repository\footnote{\url{https://wordpress.org/plugins/buttonizer-multifunctional-button/}}. An action button is positioned in the lower right corner of the screen, which displays a menu when the visitor clicks on it. The administrator of the platform is able to configure various actions within this menu, like direct messaging via social networks, the execution of JavaScript code or redirection to other websites. Supported social networks include \emph{Twitter Direct Message}, \emph{Facebook Messenger}, \emph{Skype}, \emph{WhatsApp}, email and many others. 
+
+
+In addition, \emph{Gitter} would also be a useful social network to provide assistance to users\footnote{\url{https://gitter.im/}}. Gitter is a project led and operated by Troupe Technology Ltd, a subsidiary of GitLab Ltd\footnote{\url{https://about.gitlab.com/blog/2017/03/15/gitter-acquisition/}}. Identified as a social network, it was originally intended to help GitHub users to chat and communicate with each other\footnote{\url{https://web.archive.org/web/20150208202330/http://research.gigaom.com/2014/01/gitter-is-a-github-based-chat-tool-for-developers/}}. Users and organisations are able to create public and private chat rooms in which, for example, help and support can be offered to museum visitors.
+
+\subsubsection{Embed Feeds of the Exhibit Authors} \label{social_feeds}
+
+A feed could be described as a continuous list of data and content, for example from users, which is updated regularly and does not necessarily have to be chronologically sorted\footnote{\ref{https://blog.hootsuite.com/social-media-glossary-definitions/}}. 
+
+Almost all exhibits are added by schools, museums, organisations or similar institutions. These often have their own websites and presences on social networks. In order to promote and offer advantages to them, it would be possible to link them via our platform or to embed their Instagram or Twitter feed directly into the developed platform. A straightforward but yet effective way to implement this, would be to use the oEmbed standard, which is supported by established social networks\footnote{\url{https://oembed.com/}}.
+
+\section{Integration with Other Museums}
+\label{cha:Integration with Other Museums}
+
+A demanded requirement from \ref{target_condition} is the enhancement of the museum by linking and integrating other virtual museums. As a result, our collection of available exhibits will expand and visitors are able to gain insights into alternative virtual museums. In this section, we analyse possible external partners or museums and consider use cases for their integration. Within the final implementation of the virtual museum, explicit consent should be obtained to include and use external resources. Ideally, partnerships with other institutions and museums would allow seamless integration, or at this stage, unpredictable benefits for both.
+
+\subsection{European, Latin America and Caribbean Museums} \label{EULAC}
+
+During the ICOM meeting in 2014, the partnership \emph{European, Latin America and Caribbean Regional Alliances of ICOM}, was officially established and received a grant from the European Union two years later, which amounted more than 2.4 million euro, to perform scientific work and raise awareness of the related cultures. Both EU-LAC-MUSEUMS and our project have been funded by the European Union [\cite{EULAC_grant}], therefore they could be particularly open to partnerships. Significant components of the organisation are conducted by the British University of St. Andrews [\cite{EULAC_launched}]. Due to the open sources of their website, we are technically able to embed many available exhibits to our virtual museum. Interesting and relevant content from their museum include:
+
+\begin{enumerate} 
+\item Users are able to browse a database of traditional museums which are part of the EULAC-MUSEUMS project, and receive in-depth details for each museum. The content is only available in the language of the institution, therefore major sections of the database and website can only accessed in Spanish\footnote{\url{https://eulacmuseums.net/index.php/resources/database/museums-database}}.
+\item The organisation keeps various types of publications available and make it online accessible through a bibliography directory\footnote{\url{https://eulacmuseums.net/index.php/resources/database/bibliography}}. The published and listed documents are written in various languages and cover a large number of diverse topics.
+    \item Users are able to view hundreds of exhibits portrayed in photos or 3D objects on their website\footnote{\url{https://eu-lac.org/galleries/}}. These models and photos maintain a high level of detail and quality.
+    \item Visitors of the EULAC museum can take numerous 3D tours through different places in the world, including museums, landscapes and other exciting locations\footnote{\url{https://eu-lac.org/galleries/virtualTour.php}}.
+    \item A very intuitive way of navigation provided by the EU-LAC website is a world map view\footnote{\url{https://eu-lac.org/virtual-museums/}}. On this map, visitors see markers of places to view museums with exhibits or unusual places that can be discovered in a 3D tour. This type of navigation was proposed in \ref{target_condition} and defined as a requirement by our Erasmus representative.
+\end{enumerate}
+
+\noindent Some of the platform aspects, like the virtual tours, could be embedded and linked to our virtual museum. We have not been able to identify any public API that allows us to query data or content of EULAC. Since the organisation relies for the majority of its resources on public providers to host the exhibits, they transfer their rights to these providers in some cases and thus indirectly allow us to use the content.
+
+In the following section, we discuss some of the resources created and used by EULAC and evaluate, how an integration with Wordpress would be possible for our virtual museum. The majority of the exhibits can be displayed by embedding external websites and platforms, which often provide a RESTful API or ideally Wordpress plugins.
+
+\subsubsection{3D Tours}
+
+EULAC uses the established and cost-effective provider \url{Roundme.com} to host its 3D tours and 360° photography\footnote{\url{https://roundme.com/@eulac3d}}. The platform does not offer its own Wordpress plugin, nor does it support available and tested 3D/360° plugins available in the Wordpress plugin repository. Furthermore, Roundme does not offer an official RESTful API, making the integration process only possible via Iframes. Embedding via Iframes would therefore be controlled by a self-developed plugin. In the official \emph{Roundme Terms and Conditions}\footnote{\url{https://roundme.com/static/terms}}, the user agrees to keep the copyright on his content, but allows public use and distribution to third-parties, as long the Roundme terms are followed.
+
+
+\subsubsection{3D Models}
+
+EULAC has published over 178 unique 3D models on the Sketchfab platform\footnote{\url{https://sketchfab.com/eu-lac-3D}}, which is a marketplace for offering and selling 3D models. EULAC, in turn, uses it to host their exhibits for free. The platform offers an open-source Wordpress plugin\footnote{\url{https://de.wordpress.org/plugins/sketchfab-oembed/}}, to embed and display Sketchfab 3D models, enabling us to extend our virtual museum with a powerful presentation tool for 3D models. Thus, the management of the models can possibly controlled by a self-developed plugin. Authors are also able to directly use the URL of a Sketchfab content in a post, and the plugin embeds the viewing tool at exactly this location in the post. When users publish 3D models on Sketchfab, the authors retain the copyright, but grants third-party developers the permission to display content through the use of the API, as long as it is in accordance with Sketchfabs Terms of Use\footnote{\url{https://sketchfab.com/terms}}.
+
+
+
+\subsubsection{Wikipedia}
+
+The virtual museum of EULAC often references resources and articles from Wikipedia. While there are numerous Wordpress plugins to embed Wikipedia, the plugin \emph{"Wikilookup" by Moriel Schottlender}\footnote{\url{https://de.wordpress.org/plugins/wikilookup/}} seems to be the most fitting in our research. This plugin is completely free of charge and enables authors to make terms or components hoverable. If the visitor of our virtual museum, for example, hovers over a word with the mouse that has been linked to Wikipedia, a popup appears, showing a short summary of the Wikipedia article and gives the user the ability to continue reading. 
+
+
+\subsubsection{Further Approach}
+
+The museum of the European, Latin America and Caribbean Regional Alliances of ICOM offers countless valuable and highly interesting exhibits, which can be well embedded using the evaluated toolkit and appropriate plugins. A cooperation with the organisation would offer us even more possibilities and eventually enable us to seamlessly embed the EULAC-MUSEUM into our virtual museum. 
+
+\subsection{The National Museum of Computing}
+
+As mentioned in \ref{examples_of_virt_museums}, the British National Museum of Computing maintains an online presence which allows visitors to take 3D tours through the museum, view images interactively and read in-depth stories and background information about mostly technological exhibits\footnote{\url{https://tnmoc.org}}. The museum uses the tool Matterport for their 3D tours, for which a plugin exists in the official Wordpress plugin repository\footnote{\url{https://de.wordpress.org/plugins/shortcode-gallery-for-matterport-showcase/}}. Content published with this tool is allowed to be embedded and displayed on external websites using the Matterport Viewer\footnote{\url{https://matterport.com/de/terms-of-use}}.
+
+
+\subsection{Google Arts \& Culture}
+
+Google offers with its platform \emph{Google Art \& Culture} a highly modern and innovative virtual museum, counting far more than 200 participating museums and institutes, and over 7 million exhibited images [\cite[3]{googleArts}]. Google supports the embedding of exhibits, but requires the publisher to explicitly allow an exhibit to be displayed and loaded on a particular website\footnote{\url{https://support.google.com/culturalinstitute/partners/answer/6056352?hl=en&ref_topic=6083157}}, thereby requiring a partnership with the relevant museums and institutions.

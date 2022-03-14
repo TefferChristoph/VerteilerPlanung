@@ -1,0 +1,114 @@
+\documentclass[german,oneside,color]{htldipl}
+% Zulässige Class Options: 
+%   Hauptsprache: german (default), english
+%   Doppelseitig: oneside (default), twoside
+%   Syntax-Highlighting: color (default), black
+
+% die folgende Zeile einkommentieren für Arial-Ähnliche Schriftart
+%\renewcommand{\familydefault}{\sfdefault}
+\usepackage{hyperref}
+\newcommand{\chapquote}[3]{\begin{quotation} \textit{#1} \end{quotation} \begin{flushright} - \footnotesize{#2, \textit{#3}\end{flushright} }}
+\usepackage{spverbatim}
+\usepackage{placeins}
+
+\makeatletter
+\newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
+
+\graphicspath{{images/}}    % Bilderverzeichnis
+
+\include{Settings}
+
+\makeglossaries
+\loadglsentries{glossary}					%beinhaltet Daten für das Glossar
+\addbibresource{literatur.bib}     %beinhaltet Daten für das
+
+
+%%%----------------------------------------------------------
+\begin{document}
+%%%----------------------------------------------------------
+%Einstellungen an die eigene Diplomarbeit anpassen
+
+\title{Verteilerplanung}
+\abteilung{IT}
+%\schwerpunkt{} wenn kein Ausbildungsschwerpunkt vorhanden ist z.B. Informatik
+\schwerpunkt{Computer Science}
+\studienort{Wiener Neustadt}
+\schule{HTBLuVA Wiener Neustadt}
+\schullogo{htl.jpeg}
+\abgabejahr{2020/21}
+\betreuerA{Mag.\ Gabriele Haas}
+\betreuerB{}
+\betreuerC{}
+%\betreuerD{} leer lassen wenn nicht vorhanden
+\schuelerA{Christoph KRAUSE}
+\evidenzA{5CHIF}
+\subthemaA{Softwarearchitekturkonzepte, Optimierung von Workflow mittels BPMN und Usability, Datenaufbereitung in PDF-Format}
+\schuelerB{David REINECKER}
+\evidenzB{5CHIF}
+\subthemaB{Graphische Benutzeroberfläche, Verfahren zur Gewährleistung der ÖNORM-Konformität}
+\schuelerC{Christoph TEFFER}
+\evidenzC{5CHIF}
+\subthemaC{Datenbankerstellung, Backend-Funktionalitäten, Datensicherheit und Qualitätssicherung}
+\schuelerD{}
+\evidenzD{}
+\subthemaD{}
+\schuelerE{}
+\evidenzE{}
+\subthemaE{}
+%\schuelerE{} leer lassen wenn nicht vorhanden
+%\evidenzE{}
+%\subthemaE{}
+
+%%%----------------------------------------------------------
+\frontmatter
+\maketitle
+\tableofcontents
+%%%----------------------------------------------------------
+
+%\include{vorwort}				%ggfs. weglassen
+%\include{dokumentation}
+%\include{kurzfassung}	
+%\include{abstract}			
+
+%%%----------------------------------------------------------
+\mainmatter           %Hauptteil (ab hier arab. Seitenzahlen)
+%%%----------------------------------------------------------
+
+%\include{einleitung}
+\include{general}
+\include{security_quality}
+%\include{integration}
+%\include{conclusion}
+%\include{real_virt}
+%\include{social}
+%\include{lac_museum}
+%\include{use_cases}
+%\include{schluss}
+
+%%%----------------------------------------------------------
+%%%Anhang
+\appendix
+%\include{anhang_a}	% Technische Ergänzungen
+
+%%%----------------------------------------------------------
+%Ausgabe der automatischen Zusatzdaten: Glossar, Index, Literaturverzeichnis
+%\clearpage
+%\printglossaries
+
+
+
+
+%Literaturverzeichnis
+%\clearpage
+\addbibresource{literatur.bib}
+\addcontentsline{toc}{chapter}{\bibname}
+
+\printbibliography
+
+
+%%%----------------------------------------------------------
+
+%%%Messbox zur Druckkontrolle
+%\include{messbox}
+
+\end{document}

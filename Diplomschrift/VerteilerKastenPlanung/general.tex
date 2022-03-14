@@ -1,0 +1,392 @@
+\chapter{Datenbanken}
+\label{cha:Datenbankerstellung}
+\begin{flushleft}
+
+Hinter, so gut wie jeder, Software steht eine Datenbank. Dieses Kapitel beschäftigt sich mit dem Erstellen einer relationales Datenbank. Dazu gehört die Erklärung des Konzepts der relationalen Datenbank, das Erstellen eines Datenmodells inklusive der Begriffe und Konzepte. 
+
+\section{Was ist eine Datenbank im Allgemeinen}
+ 
+ Im Allgemeinen ist eine Datenbank ein Ort an dem Daten abgespeichert sind. Diese Daten werden nur von einer bestimmten Gruppe von Benutzern benutzt und die Daten haben einen gewissen Zweck und Zusammenhang. 
+ 
+ \section{Datenbankmanagementsystem (DBMS)}
+ 
+ Ein DBMS ist eine Software, die dabei hilft Datenbanken zu verwalten. Somit wird den Benutzer das Erstellen, Bearbeiten oder Löschen einer Datenbank erleichtert. Außerdem hat ein DBMS viele andere Aufgaben. Eine oder mehrerer Datenbanken bilden in Verbindung mit dem Datanbankmangementsystem das Datenbanksystem.
+ 
+ \subsection{Aufgaben eines DBMS}
+ 
+ Ein DBMS muss alle Daten einheitlich verwalten und somit jedes einzelne logische Datenelement an genau einem Ort abspeichern. Das DBMS muss aber die Vielzahl der komplexen Beziehungen in der Datenbank definieren  und zusammenhängende Daten rasch miteinander verknüpfen können.
+ 
+ Neben der Datenverwaltung muss das DBMS auch noch eine Schnittstelle einer Datenbanksprache, in den meisten Fällen SQL (Strucured Query Language), für: 
+\begin{itemize}
+\item Datenanfragen, Datenmanipulation (Data Manipulation Language, DML
+\end{itemize}
+\begin{itemize}
+\item Verwaltung der Daten (Data Definition Language, DDL)
+\end{itemize}
+\begin{itemize}
+\item Berechtigungssteuerung (Data Controll Language, DCL)
+\end{itemize}
+ 
+ Durch den Einsatz von einem DBMS kann man den unautorisierten Zugriff auf Daten innerhalb der Datenbank verhindert werden. Das ist sehr wichtig, weil sensible Daten abgespeichert werden können.
+ 
+Ein DBMS verwaltet ebenfalls die Benutzer. Sollten mehrere Benutzer gleichzeitig auf der Datenbank arbeiten und auf die selben Daten zugreifen, kann das zu einem Schreibkonflikt führen.
+
+Es wird auch erwartet,dass nach auftreten Hard- oder Softwarefehlern die Datenbank wieder in einen korrekten und vollständigen Zustand ist.  
+
+\section {Architektur eines Datenbanksystems}
+
+Architektur kann im Bereich der Datenbankanwendungen einen unterschiedlichen Kontext haben. Man unterscheided grundsätzlich zwischen:
+\begin{itemize}
+    \item Systemarchitektur eines Datenbankmanagementsystems
+\end{itemize}
+\begin{itemize}
+    \item Schemaarchitektur eines Datenbanksystems
+\end{itemize}
+\begin{itemize}
+    \item Anwendungsarchtitekturs
+\end{itemize}
+\begin{itemize}
+    \item Verteilte Architektur
+\end{itemize}
+
+ Doch mit dem Begriff Architektur ist oftmals die Schnemaarchitektur gemeint.
+
+\subsection{Datenbankschema}
+
+Jedes Modell(->x.x.x), welches ich für die Datenbank erstelle, sollte immer zwischen der Beschreibung der Struktur und des Inhalts der Datenbank unterscheiden.
+
+Die Strukturelle Beschreibung bezeichnet man als Datenbankschema. Dieses Schema versucht man mit der Data Definition Language umzusetzen.Die grafische Darstellung wird Schemadiagramm genannt.
+So ein Datenbankschema kann für jede Anwendung spezifisch angelegt werden. Doch es gibt auch noch ein vordefiniertes Schema, für eine bestimmte Kategorie von Anwendungen, Web-Anwendung, Desktopanwendung usw., welche man als Referenzmodell bezeichnet. Solche Referenzmodelle unterliegen Standarts, erleichtertn den Austausch von Daten und verringern die Zeit die zum Entwicklung der Datenbankanwendung benötigt wird. 
+
+Daten die zu einem bestimmten Zeitpunkt in der Datenbank abgespeichert wurden, werden als Datenbankzustand bezeichnet. Jede Änderung der Datenbank entspricht einen neuen Datenbankzustand. Ziel ist es das dieser Datebbankzustand konstant ist. Ein Datenbankzustand gilt als konstant, wenn alle Daten vollständig vorhanden sind. 
+Jeder Datensatz der abgespeichert wird stellt eine Instanz dar. Eine Instanz entspricht einen Objekt oder auch Entity (->x.x.x) genannt.
+Der Datenbankzustand wird als Extension bezeichnet das Schema als Intension und die Veränderung Schemas heißt Schemaevolution.
+
+\subsection{Drei-Schichten-Architektur}
+
+Der Grundlegende Aufbau des Datenbanksystems wird durch die Drei-Schichten-Architektur beschrieben. Ziel dieses Modells ist es die, physische (interne), konzeptionelle (logische) und die externe Schicht zu trennen. 
+Jede dieser Schichten verfolgt den Zweck die abzuspeichernden Daten strukturiert abzuspeichern und die dem Anwender wieder zu Verfügung zu Stellen. Für den Datenaustausch dieses Schichten werden Transformationsregeln definiert. Der Aufbau ist für die Einhaltung der Anforderungen an das Datenbanksystem extrem wichtig. 
+
+\subsubsection{physiche Schicht}
+
+In dieser Schicht werden die physischen Speicherstrukturen und Zugriffsmechnismen einer Datenbank beschrieben.
+
+Dafür wird ein der Ebene ein Schema für die Speicherung von Daten und deren Verwaltung implementiert.
+
+Auf dieser Ebene wird die Art und Weise der Datenspeicherung beschrieben. Die Festlegung werden bei der Realisierung des physischen Modells (->x.x.x).
+
+\subsubsection{konzetuelle Schicht}
+
+Diese Schicht dient dazu, die logische Struktur dar. Anders gesagt sind hier die für den Nutzer relevanten Daten abgespeichert. 
+Hier handelt es sich um die Beschreibung der Daten und deren Zusammenhänge. Auf Basisis des konzepionellen Schemas (->x.x.x) werden den externen Schemas Datenausschnitte zu Verfügung gestellt
+
+\subsubsection{Externe Schicht}
+
+In dieser Schicht befinden sich mehrere Sichten für Benutzer. Jede dieser Sichten repräsentiert eine Gruppe von Anwendern, die Aufgrund derer Eigenschaften einen Teil der hinterlegten Daten sehen. 
+Der Rest der und das komplette Datenmodell der logischen Schicht sind den Anwender aber verborgen. Dadurch wird erreicht, dass jeder Benutzer nur das sieht, das ihm betrifft. Der Anwender kann auf die logische Schicht nicht zugreifen.
+
+\subsection {Datenunabhängigkeit}
+
+Dieses Prinzip beschreibt auf welche Daten der Datenbank ein Benutzer zugreifen darf. Außerdem hat der Entwickler die Möglichkeit das Schema auf einer Ebene zu ändern ohne das Schema der nächst höheren Schicht ändern zu müssen. Auch hier gibt es wieder die logische- und physische Datenunabhängikeit.
+
+\subsubsection{logische Datenunabhängikeit}
+
+Hier kann ich das konzeptionelle Schema verändern ohne das Externe zu ändern, außer für eine Änderung an der Datenbankstruktur betroffenen externen Schemata müssen, die Schichtendefinitionen angepasst werden. So kann zum Beispiel ein Attribut geändert werden, ohne dass das eine Auswirkung auf die externe Schicht hat.
+
+\subsubsection{Phyische Datenunabhängigkeit}
+
+Bei einer Änderung des internen Schemas hat das wieder keine Auswirkung auf das konzeptuelle- und das externe Schema. Netztwerkaritige Datenbanken können keine physische Datenunabhängigkeit bieten, weil diese starke Bindungen an Zugriffspfade haben.
+
+\section{Datenbank Konzepte}
+
+Es gibt verschiedene Arten von Datenbank Konzepten. Diese unterscheiden sich vor allem durch ihre Struktur. Zu den beliebtesten Konzepten gehören
+\begin{itemize}
+    \item NoSQL-Datenbanken
+\end{itemize}
+\begin{itemize}
+    \item Objektrelationale
+\end{itemize}
+\begin{itemize}
+    \item relationale Datenbanken
+\end{itemize}
+\break
+
+\subsection{NoSQL-Datenbanken}
+
+NoSQL steht für Not-Only-SQL (structured Query Language) und nicht wie man vermuten könnte, dass sie kein SQL unterstützen. Diese Art der Datenbank wird vor allem in der Web-Entwicklung verwendet. Datenbankmanagementsysteme müssen viel größere Datenmengen verarbeiten und kommen vor allem im Web Bereich oft in unstrukturierter oder semi strukturierter Form vor.
+Unstrukturiert bedeuten, dass die Daten sind in einen nicht formalisierbaren Form vorliegen, dass heißt man kann sie nicht wirklich identifizieren. Textdokumente, Viedos oder Bilder sind gute Beispiele für unstrukturierte Daten. 
+Semi Strukturierte Daten sind Daten, die nicht wirklich in einer Struktur vorliegen aber einen Teil der Strukturinformation mit sich tragen.
+
+NoSQL-Datenbanken haben kein bzw. ein schwaches Schema und ist von Anfang an auf horizontale Skalierbarkeit ausgerichtet. Das heißt die Anzahl der Recheknoten in einer verteilten Datenbank wird erhöht.
+
+NoSQLDatenbank ist nicht gleich NoSQL.
+Man unterscheidet zwischen:
+\begin{itemize}
+    \item Key-Value-Datenbanksystemen
+\end{itemize}
+\begin{itemize}
+    \item dokumentorientierte Datanbanksystemen
+\end{itemize}
+\begin{itemize}
+    \item Column-Family-Datenbanksystemen
+\end{itemize}
+
+\subsubsection{Key-Value-Datenbanksysteme}
+
+Wie der Name schon vermuten lässt, speichert die Datenbank die Daten in Form von Key-Value, bzw. Schlüssel-Wert Paaren ab. Der Schlüssel muss eindeutig sein. Die Eindeutigkeit eines solchen Schlüssels kann sich auf die ganze Datenbank oder einen Namensraum innerhalb der Datenbank beziehen. Der Value kann beliebige Daten abspeichern. Den Datenbanksystem ist es egal welche Struktur die Daten haben. Zudem hat das Datenbanksystem auch keine Kenntnisse über den Dateninhalt der Values.
+
+Da solch ein Datenbanksystem kein Schema hat, bietet es die größtmögliche Flexibilität beim Schema der abzuspeichernden Daten. Auf der Kehrseite wird das Management der Schema-Evoulution gar nicht unterstützt.
+
+Auslesen kann man solche Schlüssel-Wert Paare indem man den Schlüssel oder einen Schlüsselbereich angibt. Aus Gründen der Effizienz werden den Schlüssel vom System mit einem B-Baum-Index oder einem Hash versehen. (soll ich erklären was das ist?)
+Zugriffe auf die Struktur sind unmöglich, weil, wie bereits erwähnt das Datenbanksystem keine Informationen über Struktur und Inhalt der Values hat. Aus diesem Grund kann man Key-Value-Paare auch nicht werte-basiert miteinander verknüpfen.
+
+Key-Value-Paare können auch nur eingefügt oder gelöscht werden, Veränderungen sind nicht möglich.
+
+Diese Datenbanksysteme eignen sich gut für Anwendungen, die aus einer großen Menge von Daten einen Key selektieren oder abspeichern möchten. Speicherung von Nutzerprofilen und Warenkorbdetails sind gure Beispiele.
+
+\subsubsection{dokumentenorientierte Datenbanksysteme}
+
+Auch hier werden die Daten wieder in Key-Value-Paaren gespeichert. Der große Unterschied ist, das hier Dokumente in strukturierter Form und in einem bestimmten Format abgespeichert werden. Die typisch verwendeten Datenformate sind JSON, XML oder BSON, die binäre Version von JSON (Soll ich diese 3 Formate erklären). Diese drei Formate haben eines gemeinsam, sie sind eine Folge von \textbf{Property-Value-Paaren} darstellen. Eine Property ist ein identifizierender Bezeichner der in einigen Formaten innerhalb eines Dokuments eindeutig sein muss und gegebenenfalls auch mehrwertig sein kann. Values können auch Properties enthalen, somit ist eine hierachische Architektur möglich.
+
+Die Struktur der Daten muss nicht im Vorhinein deklariert werden und kann zwischen den Dokumenten variieren. Dokumente die sich in ihrer Struktur stark unterscheiden speichert man am besten getrennt in \textbf{Collections} ab. Ähnlich strukturierte Dokumente speichert man am Besten in der selben Collection ab.
+
+Dokumente werden geziehlt anhand der Properties der Dokumente ausgewählt. Einige Systeme übernehmen die Indizierung der Properties selbst in die Hand. Verknüpfen kann man die Dokumente auch hier nicht. Bei Bedarf kann man das aber durch mehrere Abfragen realsieren. 
+Dokumente können auch hier komplett gelöscht oder eingefügt werden. In den meisten dokumentorientierten Datanbanksystemen ist auch möglich einzelne Properties in einem Dokument zu ändern,löschen oder einzufügen.
+
+Einsatz finden solche Datenbanksysteme vor allem bei Anwendungen die eine sehr große Datenmenge strukturierter oder semi-strukturierter Daten verarbeiten sollen und gegebenenfalls Schemaflexibilität benötigen. Blogging-Plattformen verwenden diese Datenbanksysteme gerne.
+
+\subsubsection{Column-Family-Datenbanksysteme}
+
+Daten werden hier in einer oder mehreren Tabllen gespeichert. Die Datensätze werden dann in Zeilen modeliert, welche durch einen eindeutigen Schlüssel, der aus einem oder mehreren Werten bestehen kann, identifiziert werden können. Jeder dieser Datensätze kann mehrere Attribute besitzen, die durch Spaltenbezeichner ausgezeichnet werden. Diese Spalten werden in eine Spaltenfamilie (Column family) gruppiert. Eine spezifische Spalte wird durch die Angabe des Bezeichners der Spaltenfamilie, der Tabelle und der Spalte qualifiziert. Spaltenfamilien können zur logischen Gruppierung der Spalten als auich zur phyischen Optimierung verwendet werden. 
+Im Gegensatz zu Spalten müssen Spaltenfamilien je nach System bereits beim Erstellen der Tabelle definiert worden sein. Spalten können zu jederzeit hinzugefügt werden, aber nicht unbedingt durch Schemaänderungen. Fügt man einen neuen Datensatz mit einer zusätzlichen Spalte ein, wird das erkannt und eine neue Spalte angelegt. 
+Im Gegensatz zur relationalen Datenbank werden die Daten nicht zeilenweise sonder spaltenweise gespeichert. Diese Technik findet auch beim Data-Warehouse seinen Einsatz. Durch das spaltenweise Speichern garantiert man die Schemaflexibilität. Außerdem werden Datensätze bei Veränderung in eine neue Version gespeichert und mit einem Timestamp versehen. 
+
+Column-FAmily-Datenbanken unterstützen die Auswahl von Daten anhand des Schlüssels oder den in der Spalte gespeicherten Werts. Unter Verwendung eines Timestamps können auch verschiedene Versionen der Daten aufgerufen werden.  Die Art des Zugriffs ist dabei von System zu System unterschiedlich. Teilweise werden SQL-ähnliche Abfragesprachen verwendet, teilweise Interfaces mit Scan- und Filter-Operatoren. Indexierung wird im Normalfall unterstützt. Verknüpfungen mittels Join-Operationen werden auch hier nicht unterstützt und müssen bei Bedarf in der Anwendung programmiert werden. 
+Nebn vollständigen Einfügen- und Löschen, wird auch hier adas partielle Update unterstützt, d.h. ich kann den Wert einer bestimmten Spalte ändern. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Grundbegriffe}
+
+Wie schon der Name verrät ist das zentrale Element der relationalen DB die Relation. Eine Relation sieht aus wie eine Wertetabelle, bei der die Reihen als Tupel und die Spalten als Attribute bezeichnet werden. 
+
+Ein relationales DB-Schema besteht aus einer Menge von Relationenschemata. Aus diesen Schema kann man die jeweiligen Relationen ableiten. Das Beschreiben eines solchen Schemas ist auf die Datenstruktur begrenzt. 
+Zur Beschreibung dieser Datenstruktur werden Attribute, Wertebereich, Relationen und Tupel verwendet.
+
+
+\chapquote{"Ein Attribut repräsentiert eine Eigenschaft eines Objekttyps und wird über eine Tabellenspalte abgebildet"
+}{\citeauthor{Prof. Dr. Petra Sauer}}{\citetitle{HANSER Taschenbuch Datenbaken S.68}}
+
+Wertebereiche werden auch als Domänen bezeichnet und enthält die Menge von möglichen Werten des Attributes. Dazu werden auch Standartdatentypen wie Integer (Ganzzahliger werd), String (Zeichenkette), Date (Datum) etc. abgebildet. 
+
+Eine Relation ist eine endliche Menge von Attributen und deren Domänen. Relationen sind Ausprägungen oder Zustände des Relationenschemas. Das Relationenschema ist die Intention und die Relation ist die Extension. Die Relation die aktuell als Ausprägung eines Relationalschemas vorhanden ist, wird als Basisrelation bezeichnet Ein Relationenschema mit einer Attribut Menge wird so dargestellt: R(A1, A2, ..., An). Durch den Anzahl der Attribute wird der Grad der Relation bestimmt. Hat also eine Relation zum Beispiel 5 Attribute hat diese den Grad 5.  Die einzelnen Objekte die durch Elemente der Relation definiert werden, nennt man Tupel. 
+
+Relationen haben gewisse Eigenschaften oder besser gesagt Regeln an die man sich halten muss. J
+
+\section{Datenmodellierung} \label{Datenmodell}
+
+
+Ein Datenmodell beschreibt die Informationen in einer Datenbank.Ziel des Modells ist es der Datenbank Struktur zu verleihen. In Sinne des Drei-Schichten-Konzepts muss ich ein physisches, ein logisches und ein konzeptionelles Schema erstellen. Die Schemata müssen in einer gewissen Reihenfolge entwickelt werden und führen von einer abstrakten zu einer konkreten Beschreibung. 
+
+\subsection{Ablauf} 
+Das Entwickeln bzw. das Entwerfen einer Datenbank orientiert sich stark an den Entwurfsschritten des Phasenmodells. Die Phasen sind an die Bedürfnisse des Datenbankentwurfes angepasst. Phase 1 ist die Anforderungsanalyse, Phase 2 ist der Entwurf des konzeptionellen Schemas, Phase 3 der logische Entwurf, Phase 4 beschäftigt sich mit der Definition der Daten, Phase 5 der physische Entwurf und Phase 6 ist die Implementierung und Wartung der Datenbank.
+
+\subsubsection{Anforderungsanalyse}
+In dieser Phase der Entwicklung beschafft man sich die nötigen Informationen die für die Datenbank realevant sind. Diese relevanten Informationen werden nun zu Anforderungen. Man Unterscheidet zwischen Informations- und Bearbeitungsanforderungen. 
+\chapquote{"Informationsanforderungen werden im Rahmen der Datenanalyse erfasst und beschreiben die Daten unabhängig von der Auswertung"
+}{\citeauthor{Prof. Dr. Petra Sauer}}{\citetitle{HANSER Taschenbuch Datenbaken S.45}}
+Der Datenbank-Entwurf basiert auf den Informationsanforderungen
+\chapquote{"Bearbeitungsanforerungen werden im Rahmen der Funktionsanalyse erfasst und beschreiben die Auswertungs- und Bearbeitungserfordernisse auf der DB"}{\citeauthor{Prof. Dr. Petra Sauer}}{\citetitle{HANSER Taschenbuch Datenbaken S.45}}
+
+Die Bearbeitungsanforderungen beinhalten die Angaben über die Art des zu bearbeitenden Prozesses, damit sind Abfragen, Updates oder Berichtsgenerierung gemeint. Quantität, zum Beispiel Häufigkeit eines Prozesses, des aufzuführenden Prozesses zählen auch zu den Angaben für die Bearbeitungsanforderungen. Außerdem sollten hier auch schon Sicherheitsanforderungen, zum Beispiel Zugriffsrechte, an die Datenbank definiert sein. In der Funktionsanalyse wird analysiert wie sich das System verhalten soll und wie man dieses Verhalten erreichen kann.
+
+\subsubsection{Konzeptioneller Entwurf}
+\chapquote{Datenbanken stellen eine abstrahierendes Abbild der Realität dar}{\citeauthor{Prof. Dr. Petra Sauer}}{\citetitle{HANSER Taschenbuch Datenbaken S.46}}
+
+Nach der Anforderungsanlyse wird in dieser Phase der sogenannte "Abzubildender Weltauschnitt", auf englisch "Universe of Disource", zum ersten Mal formal beschrieben. Zu Beachten ist, dass man hier noch nicht versucht das Ganze in einem konkreten Datenbank Management System zu realisieren, weil diese Beschreibung eine gute Basis für die weiteren Schritte beim Entwickeln eines Systems sein soll.
+
+Um die Datenbank formal zu beschreiben wird ein Datenmodell, wie zum Beispiel das Entity-Relation-Modell (ERM) verwendet. Die Anforderungen des Benutzers werden in einer formalen Schreibweise dokumentiert, daraus ergibt sich das konzeptuelle und die externen Schemata.
+
+Für die Entwicklung solcher Schemata gibt es zwei Ansätze, nämlich den Top-Down-Ansatz, bei den zuerst das konzeptuelle Schema modelliert und externe Schemata werden als nicht notwendige Ausschnitte des konzeptuellen Schemas abgeleitet. Beim Bottom-Down-Ansatz wird zuerst das externe Schema modelliert, aus deren Integration das konzeptuelle Schema besteht. Das externe Schema gibt Einsicht über die Anforderungen einzelner Benutzer wieder. Aufgrund, dass diese unterschiedliche Anforderungen stellen kann es zu Überschneidung und Widersprüche kommen. Bevor man die einzelnen Schemata integriert sollte man diese analysieren und Konflikte erkennen und auflösen. Konflikte können zu Redundanzen (gleicher Speicherinhalt) oder einen inkonsistenten(nicht vollständigen) Datenbestand führen. Zu den Konflikten gehören der Namenskonflikt, tritt bei Namensüberschneidungen oder Ähnlichkeiten durch Sonderzeichen auf, der Typkonflikt, wenn verschiedene Datenstrukturen das selbe Element, basierend auf unterschiedlichen Aussagen diverser Benutzer zum abzubildendem Weltauschschnitt, Strukturkonflikt, wenn verschiedene Modelierungsvarianten zu einem Sachverhalt und zum Schluss noch der Bedingungskonflikt, welcher durch die Verwendung von verschiedenen Integritätsbedingungen in Schichten auftreten kann.
+
+\subsubsection{Logischer Entwurf}
+
+Hier wird auf Basis des konzeptuellen Schemas die Datenstruktur weiter formell beschrieben, aber in einem anderen Beschreibungsformulismus.
+
+\chapquote{Das logische Schema beschreibt die Datenstruktur des Universe of Discourse in Abhängigkeit vom konkreten Datenmodells des DBMS}{\citeauthor{Prof. Dr. Petra Sauer}}{\citetitle{HANSER Taschenbuch Datenbaken S.47}}
+
+In diesem Schritt wird auch entschieden ob man die Datenbank in einem konventionellen, objektorientierten, objektrelationalen oder einem relationalen DBMS realisieren möchte. Meistens wird man sich aber für ein relationales DBMS entscheiden. Außerdem wird hier die Vorarbeit für das Modelierungskonzept der Anwendung. 
+Zwei Schritte sind nötig um ein logisches Schema zu entwickeln. Zuerst wird das konzeptuelle Schema auf ein logisches Schema transformiert. Hier zahlt sich ein realtaionles DBMS aus, weil dieser Schritt kann automatisiert werden, weil sich ein System von Regeln der Transformationen, auf welche ich in einem späteren Kapitel näher eingehen werde, etabliert hat. Im nächsten Schritt geht es darum das logische Schema zu Verbessern oder zu Bearbeiten. Wichtig ist es vor allem Redundanzen zu minimieren, wenn nicht sogar zu vermeiden. Sollte man sich für das relationale DBMS entschieden haben, folgt nun die Normalisierung, auf welche ich in einem späteren Kapitel detaillierter beschreiben werde. Die Normalisierung ist ein Verfahren um ein relationales DBMS so zu gestalten, dass sich der Datenbestand nach Einfüge-, Änderungs- und Löschoperationen wieder in einen konsistenten Zustand befindet. Dazu teilt man Redundanzen immer wieder in Relationen auf um diese schrittweise zu minimieren.
+
+Abbildung logisches relationales Datenmodell
+
+\subsubsection{Datendefinition}
+
+In dieser Phase wird mit Hilfe der Datenbanksprache, meistens SQL die logischen und externen Schemata beschrieben. Die logischen Schemata werden mithilfe der Data Definition Language (DDL) beschrieben und die verschiedenen Sichten mit der View Definition Language (VDL), welche ein Teil der DDL ist.  Die DDL hilft dabei bei einem relationalen Datenmodell Relationen, Wertebereich und Attribute zu definieren.
+
+Neben der Datenbankstruktur werden in dieser Phase auch die Integritätsbedingungen mit der Datenbanksprache beschrieben, ein wichtier Teil ist es die Fremd und Primärschlüssel richtig zu setzen. Das Ergebnis dieser Phase ist ein Datenbankschemata für das konkrete DBMS
+
+\subsubsection{Physischer Entwurf}
+
+Hier geht es darum ein internes Schema zu entwickeln, dabei hilft uns die Stroage Structure Language (SSL). Um dieses Schema zu entwickeln muss man die geeigneten Speicherform und mögliche Zugriffspfade der Daten zu definieren.
+
+Ziel des Ganzen ist es eine hohe Leistung der Datenbank zu gewährleisten, dazu gehören geringe Zugriffszeiten, die optionale Nutzung des Speicherplatzes und eine hohe Durchsatzrate. Hier wird quasi die Definition der Datenbank optimiert
+
+\subsubsection{Implementierung und Wartung}
+
+Ist die Datenbank schlussendlich installiert, dort wo sie für den Dauerbetrieb entwickelt wurde endet die Entwurfsphase. Dazu gehört das Erfassen oder Generieren von Datenbeständen, dazu benötigt man die Data Manipulation Language (DML) des DBMS. Bei Übernahme eines anderen System kommt es oft zu Migrationsproblemen. Um dieses Problem zu bewältigen sollte man die Datenstrukturen abgleichen und möglicherweise muss man ein Kovertierungsprogramm erstellen.
+
+Sobald die Datenbank in den Betrieb aufgenommen wird beginnt die Wartungsphase. Da man möchte, dass eine Datenbank so lange wie möglich genutzt werden kann, muss man diese laufend an neue Anforderungen anpassen, zum Beispiel könnte der Kunde etwas an seiner IT-Struktur ändern oder es muss etwas am Datenmodell geändert werden.
+
+
+
+
+\subsubsection{ERM}
+Wie schon vorher erwähnt verwendet man ein ERM um eine Datenbank das erste Mal formal zu beschreiben. Es wird eingesetzt um das konzeptuellen Schemas zu entwerfen und zum Modellieren der Benutzersichten(Views).
+Das ERM ist ein semantisches Datenmodell.
+
+\chapquote{Semantische Datenmodelle beschreiben einen Weltauschnitt als Menge von Gegenständen (Objekten), zwischen den wohldefinierte Beziehungen existieren und die durch Eigenschaften charakterisiert werden.}{\citeauthor{Prof. Dr. Petra Sauer}}{\citetitle{HANSER Taschenbuch Datenbaken S.49}}
+
+Aufgrund seiner Unabhängigkeit eines konkreten DBMS, seiner guten Übersicht, der Beschränkung auf wenige und einfache Basiskonzepten und der Möglichkeit des uneingeschränkten entwickelns eines Datenmodells hat sich das ERM durchgesetzt.
+
+\subsubsection{Grundkonzept}
+
+Ein ERM enthält Entities, Entitytypen, die Beziehungen oder Realationships, Beziehungs- beziehungsweise Realtionshiptypen, Attribute, Werte sowie Rollen.
+Grafisch wird ein ERM als Entity-Realtion-Diagramm (ERD) dargestellt. Zum allgemeinen Verständnis werden ich immer wieder Beispiele bringen. Zu Beginn gleich mal ein Standartbesipiel nämlich Lieferant und Artikel. In der unteren Abbildung kann man eine ganz einfache Beziehung, zwischen den Entitytypen Artikel und Lieferant sehen
+
+
+Abbildung Lieferant liefert Artikel  
+
+
+\chapquote{Ein Entity ist ein abgrenzbarer, selbständiger Gegenstand, ein Begriff, ein Ding, eine Person oder auch ein Ereignis des zu Modellierenden Weltauschnschnitts.}{\citeauthor{Prof. Dr. Petra Sauer}}{\citetitle{HANSER Taschenbuch Datenbaken S.51}}
+
+Entities werden nicht einzeln dargestellt, sondern in einer Menge des dazugehörigen Entityps. In unserem Beispiel sind Lieferant und Artikel unsere Enities. Zwischen den Entities werden Beziehungen verknüpft. Entities werden über Werte oder Attribute näher beschrieben
+
+\chapquote{Eine Beziehung ist die logische Verknüpfung von zwei oder mehreren Entities.}{\citeauthor{Prof. Dr. Petra Sauer}}{\citetitle{HANSER Taschenbuch Datenbaken S.51}}
+Genau wie bei den Enteties werden Beziehungen nicht einzeln dargestellt sondern auch wieder durch Mengen des dazugehörigen Beziehungstyps, weil man sonst die Übersicht verlieren würde.
+
+Entities werden meistens als Rechteck dargestellt, deren Attribute als Ellipsen und Beziehungen meistens als Rauten. Attribute werden aber meistens aus Gründen der Übersicht meistens nicht dargestellt.
+Enteties eines Entitytypen haben in Beziehungen immer eine gewisse Funktion, welche als Rolle bezeichnet wird über eine Beschriftung des Beziehungstypen am Ende der Kante dargestellt. Beziehungstypen werden quantitativ beschrieben. Ein klassisches ERD beschreibt die Beziehungstypen in der MinMax-Notation. Die Aussage eines ERD in der MinMax-Notation ist, wie viele Entities maximal mit wie vielen anderen Entities eines anderen Entitytypen in Beziehung stehen können. Bei der Beschreibung eines konkreten Beziehungstyps muss man die Beziehung aus der jeweiligen Sicht des Entitytyp betrachten. In unserem Beispiel müssen wir uns aus der Sicht des Lieferanten stellen wie viele Artikel soll er liefern und aus der Sicht des Artikel, von welchem Lieferant kommt der Artikel beziehungsweise wie viele Lieferanten liefern den Artikel. Aufgrund dessen, dass in der Informatik selten von konkreten Werten ausgegangen wird sondern von den Maxima werden meistens nur 0 beziehungsweise 1, N oder M zur Beschreibung des Beziehungstypen verwendet.  Daraus ergibt sich die Möglichkeit Beziehungstypen zu quantifizieren. Mit 0:N, 1:1 und N:M. Hier sieht man den in der Informatik üblichen "Alles oder Nichts" Ansatz. 0 oder 1 stehen in für "Nichts" und N und M stehen für das Maximum. Man muss sich also bei Beziehungen die Frage stellen mit wie viele Entities eine Entity maximal und minimal in Beziehung stehen muss. 
+Eine 1:1-Beziehung tritt auf, wenn eine Entity in Beziehung mit genau einer anderen Entity stehen kann, ein klassisches Beispiel für solch einen Fall ist der Führerschein, eine Person kann nur einen Führerschein besitzen und ein Führerschein ist nur einer Person zugeordnet. 
+Eine 1:N-Beziehung tritt auf, wenn eine Enitity mit mehreren Entities stehen kann, in einer Klasse sind mehrere Schüler, aber ein Schüler kann nur einer Klasse zugeteilt sein.
+Eine N:M-Beziehung tritt auf, wenn mehrere Enteties in Beziehung zu mehreren anderen Enteties stehen können. Um wieder auf unseren Lieferanten zurück zu kommen, ein Lieferant liefert mehrere Artikel und der Artikel wird von mehreren Lieferanten geliefert.
+
+\subsubsection{Abhängigkeiten}
+Ein Vorteil der MinMax-Notation ist, dass man Existenzabhängigkeiten zwischen Enteties dargestellt werden kann. Das heißt wenn eine Entity ohne eine andere gar nicht existieren kann, zum Beispiel kann ein Raum ohne ein Haus nicht existieren. Die Abhängige Entity wird meistens doppelt umrandet und mit den Minimum dargestellt, wenn das Minimum genau einmal im Besziehungstypen vorkommt handelt es sich um eine einseitige Existenzabhängigkeiten kommt das Minimum in einem Beziehungstypen öfters als einmal vor spricht man von einer mehrseitigen Existenzabhängigkeit.
+
+\subsubsection{Rekursionen}
+Von einer Rekursion spricht man, wenn eine Entity mit einer Entity des selben Entitytypen in Beziehung stehen. Es gibt drei verschiedene Arten der Rekursion, welche ich durch Beispiele erklären werde. 
+
+Die einfachste Form ist die Alternative. Nehmen wir den Entitytypen Person her. Eine Person kann in Österreich nur mit einer anderen Person verheiratet sein, somit haben wir eine rekursive 1:1-Beziehung
+
+Abb. rekursion 1:1
+
+Schon etwas komplexer ist die Hierarchie. Angenommen wir haben den Entitytyp Arbeiter, in größeren Unternehmen ist es üblich, dass eine Hierarchie von Vorgesetzten herrscht. Ein Angestellter hat einen direkten Vorgesetzten und dieser Vorgesetzte ist Vorgesetzter von mehreren Angestellten, doch auch ein Vorgesetzter kann jemanden Vorgesetzte haben. In diesem Fall haben wir eine rekursive 1:N-Beziehung.
+
+Abb. rekursive 1:N
+
+Die komplexeste Form ist das Netzwerk. Ein Artikel kann beispielsweise ein Teil eines anderen Artikels sein und aus mehreren anderen Artikeln bestehen. In diesem Fall spricht man von einer rekursiven N:M-Beziehung
+
+Abb. rekursive N:M
+
+\subsubsection{Mehrwertige Beziehungstypen}
+
+Steht ein Entitytyp in Beziehung mit einem Anderen spricht man von einer binären Beziehung, weil die Beziehung nur in zwei Richtungen geht. Es kommt jedoch auch vor, dass eine Beziehung aus mehreren Entitytypen besteht, hier spricht man von einer n-ären Beziehung, oder auch mehrwertigen Beziehung. Das Problem an diesen Beziehungen ist, dass sie sich nicht frei von Verlust in binäre Beziehungen auflösen lassen. Dazu wieder ein Beispiel. Eine Autoversicherung besteht aus den Entitäten Versicherungsnehmer, Versicherer und das Auto welches zu Versichern ist.
+
+Abbildung, theretische n-äre
+
+Der Beste Ansatz, solch einen Fall in eine binäre Beziehung aufzulösen ist es einen weiteren Entitytypen, der mit allen Anderen die beteiligt sind in Beziehung steht quasi künstlich zu erstellen.
+
+Abb. m1 N-äre
+
+
+\subsubsection{Attribute}
+
+Attribute sind einem Entitytyp zugeordnet und werden durch deren Namen und Wertebereich repräsentiert. Man muss jedoch zwischen Schlüssel- und Nichtschlüsselattributen unterscheiden. Von einem Schlüsselattribut spricht man, wenn es ausreichend genug ist um genau eine Entity zu identifizieren. Dabei sollte man auch beachten, dass Schlüsselattribut so minimal wie möglich sein soll. Oftmals wird ein zusätzliches Attribut, das eigentlich nichts mit dem abzubildenden Weltauschnittes als Schlüsselattribut zu verwenden, dafür wird meistens eine ID verwendet. 
+Die restlichen Attribute werden als Nichtschlüsselattributen bezeichnet. Diese Attribute sind mehr oder weniger der Bauplan der Entity kurz zusammengefasst dienen die Schlüsselattribut dazu eine Entity zu identifizieren und Nichtschlüsselattributen sind dazu da eine Entity zu charakterisieren. Diese Attribute werden in Zuge des logischen Entwurfes definiert. Um Redundanzen zu vermeiden sollte man beachten, dass man das selbe Attribut nicht mehrmals abspeichert und Attribute nur dort abspeichern wo sie genötigt werden.
+
+
+
+\subsubsection{Grundbegriffe und Konzept}
+
+
+\subsection{Modellierungsbesipiel anhand unseres Projekts}
+
+Ich werde nun erklären wie ich beim Erstellen des DBMS der Verteilerplanung. Dabei werde ich wie ich anhand des zuvor besprochenen Phasenmodells 
+
+\subsubsection{Anforderungsanalyse}
+
+Der Großteil der Anforderungen des Kunden ist bereits im Kriterienkatalog definiert. Doch um detailliertere Anforderungen oder gewisse Unklarheiten zu klären empfiehlt es sich jedoch mit dem Kunden zu reden, je mehr Informationen man hat, desto besser kann man arbeiten. 
+
+In unserem Fall gab es keinen Kriterienkatalog und unser Kunde hat uns nur die Anforderung gestellt, dass er eine Desktopanwendung haben möchte, die es Elektrikern ermöglicht einen Hausplan anzulegen indem die geplanten Geräte pro Raum aufgelistet sind und danach soll berechnet werden wie das Haus optimal elektrisch abgesichert werden soll. Diese Beschreibung ließ viel Interpretationsraum für die Entwicklung des Systems. Anforderungen an das DBMS wurden ebenfalls nicht gestellt. Somit mussten wir uns viel durch Brainstormings und Recherchen erarbeiten.  
+
+\subsubsection{Konzeptioneller Entwurf}
+
+In dieser Phase sollte mittlerweile entschieden sein welche Entitytypen benötigt werden, Attribute sind mehr oder weniger noch egal.  
+
+Schon während der Anforderungsanalyse war uns klar das wir auf jeden Fall Geräte, Räume, Häuser und Sicherungen abspeichern müssen. Wir haben danach herausgefunden, dass nicht alle Geräte gleich abgesichert werden müssen, zum Beispiel muss man eine Steckdose anders absichern als eine Lampe. Außerdem sollen auch SmartHome Geräte berücksichtigt werden. Dies brachte mich zu der Idee die Geräte in Unterkategorien zu teilen. Dazu habe ich die sogenannte Vererbung, welche auch in der objektorientierten Programmierung existiert verwendet. Hierbei erben die abgeleiteten Entities (Subtypen) das verhalten, im Fall der Datenbankentwicklung Attribute einer Entity (Supertyp).
+Man nutzt Vererbung auch wenn mehrere Enteties die selben Attribute benötigen aber sich durch andere doch unterscheiden.
+Das ist eine Sonderform der Beziehungen und kann in zwei Arten aufgelöst werden. 
+Der erste Fall tritt ein wenn man eine konkrete Entity mehreren Subtypen zuordnen kann. Diese Art der Vererbung löst man in einer 1:N Beziehung auf, da dies bei uns nicht der Fall war erläutere ich diesen Variante anhand eines selbsgewählten Beispiels. Beim Fußball gibt es mehrere Positionen und ein Spieler kann beispielsweise Stürmer sein aber auch als Mittelfeldspieler agieren. Der Entitytyp Fußballspieler ist unserem Fall der Supertyp und die einzelnen Positionen die Subtypen. Der Fußballspieler wir nun als Stürmer und Mittelfeldspieler gelistet.
+Der zweite Fall tritt ein, wenn eine Entity nur einen Subtypen zuordnen kann. Wie in unserem Fall ein Haushaltsgerät kann keine Steckdose sein. Hier wird das Ganze in einer 1:1-Beziehung aufgelöst werden.
+Mischformen gibt es keine.
+
+Nun zur Erklärung des ERDs. Wir haben die MinMax Notation verwendet, weil sie sehr leicht zu lesen ist. Zu beachten ist, dass
+man die Werte des Beziehungstypen umgekehrt lesen muss, zum Beispiel befinden sich mehrere Räume in einem Haus. Die Entity Raum ist doppelt umrandet, weil wie bereits vorigen erwähnt wurde der Raum ohne das Haus gar nicht existieren kann. Dazu befinden sich in einem Raum mehrere Geräte und ein Gerät kann in mehreren Räumen installiert sein. Es ist nicht nur wichtig welches Gerät sich in diesem Raum befindet sondern auch die Anzahl der Geräte in diesem Raum, deshalb habe ich der Beziehung das Attribut Anzahl hinzugefügt um Redundanzen zu vermeiden. Die Geräte sind wie bereits oben erwähnt in drei Subtypen unterteilt, nämlich SmartHome Geräte, Steckdosen und Haushaltsgeräte, jeder Subtyp benötigt andere Attribute oder müssen wie bereits oben erwähnt anders behandelt werden. . Sicherungen und Smarthome Komponenten  stehen mit nichts in Beziehung, weil man von der Sicherungen nicht auf die Geräte schließen kann, das selbe gilt auch für die SmartHome Komponenten.
+
+\subsubsection{Logischer Entwurf}
+
+Die Attribute welche die Entities beschreiben sollen haben wir uns im Selbsstudium erarbeitet. Hier musste ich mir sehr gut überlegen welche Attribute als Schlüssel Attribute dienen sollen und bin bei jeder Entity zum Entschluss gekommen ein künstliches Attribut das ich meistens als ID bezeichnet habe. Beim Haus hätte man zwar die Adresse als Schlüsselattribut verwenden können, aber die Adresse lässt sich schwer als ein Attribut abspeichern, deshalb die ID. Außerdem musste im Sinne des ERDs, die Fremdschlüssel vergeben.
+
+\chapquote{Ein Fremdschlüssel ist eine Attributmenge, die einen Primärschlüssel einer (anderen) Relation referenziert}{\citeauthor{Prof. Dr. Petra Sauer}}{\citetitle{HANSER Taschenbuch Datenbaken S.71}}
+Außerdem haben sie auch die Aufgabe die Konsistenz einer relationalen Datenbank zu sichern. 
+
+Dagegen ist ein Primärschlüssel, eine Menge von Attributen die eine Entity identifizieren. Ein Primärschlüssel muss immer eindeutig sein, man darf ihn nie verändern und er muss immer einen Wert haben.
+
+Die Vergabe von Fremdschlüssel muss man je nach Beziehung anders vorgehen. Bei einer 1:1-Beziehung muss man sich überlegen in welchen der beiden Entitytypen es häufiger zu Nullwerten, also leeren Speicher kommen könnte. Derjenige bei dem weniger Nullwerte erwartet werden bekommt dann den Fremdschlüssel des anderen Entitytypen.
+
+In unserem Fall können wir den Entitytyp Gerät hernehmen. Dieser Entitytyp steht wie ich bereits im vorigen Kapitel erwähnt habe in einer 1:1-Beziehung mit all seinen Subtypen, jeder Subtyp erhält den Primärschlüssel des Supertypen als Fremdschlüssel. Hier kann man durch rein logisches Denken erkennen, dass es zu umständlich wäre den Supertypen den Fremdschlüssel jedes einzelnen Subtypen zu geben, weil man sonst zu viel unnötigen Speicher verbraucht.
+Bei einer 1:N-Beziehung wird der Fremdschlüssel an die Entity weiter gegeben welche mit nur einer Entity in Beziehung steht. Das ist eigentlich logisch, weil man bei 1:N-Beziehungen nie wirklich weiß mit wie vielen anderen Enteties eine Entity in Beziehung stehen wird. In unserem Fall würde der Raum den Fremdschlüssel des Hauses bekommen, das muss er aber wegen der Abhängigkeit sowieso
+Bei N:M-Beziehungen werden die Primärschlüssel aller beteiligten Entities und einem zusätzlich Attribut, in einer eigenen Relation abgespeichert.
+In unserem Fall werden die Primärschlüssel des Raums und des Geräts mit einer Anzahl in einer eigenen Relation abgespeichert, so kann man auch schnell sehen wie viele Geräte sich in einem Raum befinden. 
+
+Ich habe bei der Beschreibung der Enteties bereits die Datentypen welche die Attribute bekommen sollen. Das ist aber kein Muss. 
+Das Haus lässt sich über die ID, welche aus 4 Zeichen besteht identifizieren und über die Adresse, die Postleitzahl, der dazugehörige Ort und der Art der Verkabelung charakterisiert. Alle Attribute dieses Entitytypen sind Zeichenketten, weil man hier keine Werte zum Berechnen des Ergebnisses braucht.
+
+Der Raum hat den Fremdschlüssel des Hauses bekommen und eine zusätzliche ID, welche die Raumnummer sein soll. Diese beiden Attribute sind die Schlüsselattribute.Die Raumbezeichnung und die Nummer des Stockwerks sind die Nichtschlüsselattribut.
+
+Das Gerät bekommt nur eine ID als Schlüssel und wird durch eine Bezeichnung charakterisiert. Genauere Charakterisierungen folgen in den jeweiligen Subtypen.
+
+Neben den Fremdschlüssel des Geräts, welches zugleich Primärschlüssel des Hauhaltgeräts bildet werden hier noch die Stromstärke und die Anzahl der Phasen des Geräts abgespeichert, weil wir mit diesen Werten rechnen müssen, sind die Anzahl der Phasen und die Stromstärke als Zahlenwert abgespeichert. 
+
+Steckdosen bestehen aus der ID des Geräts als Primärschlüssel und werden durch den Typen, der Phasen Anzahl und Ampere charakterisiert. Mit den Ampere und Anzahl der Phasen müssen wird wieder rechnen, daher sind diese auch durch Zahlenwerte repräsentiert.
+
+SmartHome Geräte werden durch Geräte ID identifiziert und mit der Anzahl von Kanälen charakterisiert.
+
+Der Primärschlüssel der Sicherung ist die ID. Zusätzlich werden hier wieder aus den selbigen Gründen wie vorhin, Ampere und Phasen durch Zahlenwerte repräsentiert und der Sicherungstyp und eine Bezeichnung werden ebenfalls abgespeichert. 
+
+
+
+\subsubsection{Datendefinition}
+
+Mithilfe der Datenbanksprache SQL (Structured Query Language), habe ich in Zuge dieser Phase Tabellen erstellt. Tabellen bestehen aus Zeilen und Spalten. In den Spalten stehen die Attribute beziehungsweise deren Werte und in den Zeilen steht der ganze Datensatz oder die ganze Entity. Tabellen sind also der Speicherplatz der Enteties und werden in späterer Folge zu Objekten. Im Grunde genommen sind Tabellen wie Klassen in der Objekt orientierten Programmierung nur eben in der Welt der Datenbanken. 
+Sollte man im logischen Entwurf noch noch keine passenden Datentypen zu den jeweiligen Objekten gefunden haben wird es jetzt Zeit. Zu beachten ist, dass von SQL mehrere Varianten existieren, so eine Art Dialekt welcher von Server zu Server unterschiedlich sind. Das Grundkonzept bleibt zwar das Gleiche nur können sich Datentypen ändern. Diese können sowohl eine andere Bezeichnung haben und gewisse Datentypen existieren nicht in allen Dialekten.
+
+Da wir uns unseren Fall nur Zeichenketten und Zahlenwerte brauchen mussten wir uns nicht damit beschäftigen welche Variante der Sprache wir verwenden. Für Zeichenketten haben wir den Datentyp "varchar" verwendet, diesen Datentyp muss man auch eine Größe übergeben. Diese Zahl gibt die Größe in Bits an. Und der Rest wurde ein Integer zugeteilt. Ein Integer ist ein ganzer Zahlenwert. Außer die Ampere, denen wurde ein Decimal zugeteilt. Einen Decimal muss man zwei Werte übergeben die Größe der Zahl und die Anzahl der Nachkommastellen. Größe minus Nachkommastellen ergeben die Dezimal stellen.
+
+\subsubsection{Physischer Entwurf}
+\subsubsection{Implementierung und Wartung}
+
+
+\end{flushleft}
+

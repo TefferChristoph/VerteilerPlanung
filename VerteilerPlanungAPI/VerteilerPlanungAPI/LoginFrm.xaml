@@ -1,0 +1,24 @@
+﻿<Window x:Class="VerteilerPlanungAPI.LoginFrm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VerteilerPlanungAPI"
+        mc:Ignorable="d"
+        Title="LoginFrm" Height="250" Width="425" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="373*"/>
+            <ColumnDefinition Width="53*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="50,60,0,0" Name="tBlUsername" Text="Username" VerticalAlignment="Top" Width="67" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="50,108,0,0" Name="tBlPassword" Text="Password" VerticalAlignment="Top" Width="77" />
+
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="118,60,0,0" Name="tbUsername" VerticalAlignment="Top" Width="230" />
+        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="118,108,0,0" Name="pwBox" VerticalAlignment="Top" Width="230" />
+
+        <Button Content="Login" Height="23" HorizontalAlignment="Left" Margin="118,151,0,0" Name="btnLogin" VerticalAlignment="Top" Width="104" Click="btnLogin_Click"/>
+        <TextBlock Height="23" HorizontalAlignment="Left" x:Name ="errormessage" VerticalAlignment="Top" Width="247" Margin="118,253,0,0"  OpacityMask="Crimson" Foreground="#FFE5572C"  />
+
+    </Grid>
+</Window>

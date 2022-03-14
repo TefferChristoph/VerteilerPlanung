@@ -1,0 +1,22 @@
+﻿<Window x:Class="VerteilerPlanungAPI.AddRoom"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VerteilerPlanungAPI"
+        mc:Ignorable="d"
+        Title="AddRoom" Height="250" Width="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="373*"/>
+            <ColumnDefinition Width="53*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="50,60,0,0" Name="tblRoom"  Text="Raum Name" VerticalAlignment="Top" Width="67" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="50,105,0,0" Name="tblFloor"  Text="Stockwerk" VerticalAlignment="Top" Width="67" />
+
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="118,60,0,0" Name="tbRoom" VerticalAlignment="Top" Width="230" />
+        
+        <ComboBox Height="23" Name="cbFloors" HorizontalAlignment="Left" Margin="118,105,0,0" VerticalAlignment="Top" Width="230"/>
+        <Button Height="23" Name="btnAddRoom" Content="Raum hinzufügen" Margin="118,150,0,0" VerticalAlignment="Top" Click="btnAddRoom_Click"/>
+    </Grid>
+</Window>

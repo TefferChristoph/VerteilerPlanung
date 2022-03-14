@@ -1,0 +1,190 @@
+\chapter{Datensicherheit und Qualitätssicherung}
+\label{cha:Datensicherheit}
+
+
+\section{Authentifizierung und Autorisierung}
+
+
+Es kommt relativ selten vor, dass eine Anwendung von nur einen Benutzer benutzt wird, egal ob gleichzeitig oder nacheinander. Im Sinne der Datensicherheit ist es vom Vorteil, wenn die Anwendung nur von vorgesehenen Benutzen genutzt werden kann. Anders gesagt sollten sich Benutzer \textbf{authentifizieren}. Aber nicht jeder Benutzer hat die Berechtigung die gleichen Dinge zu tun wie andere Benutzer. Sondern sind aufgrund ihrer Rolle \textbf{autorisiert} gewisse Dinge zu tun.
+
+\subsection{Begriffserklärung}
+
+\subsubsection{Authentifizierung}
+
+Von Authentifizierung spricht man, wenn meine Identität bestätigt werden kann. Nehmen wir an Sie rufen im Kino an um Karten für eine Vorstellung auf ihren Nachnamen zu reservieren. Wenn Sie sich dann vor der Vorstellung ihre Karten von der Kasse holen zeigen Sie Ihren Ausweis her und der Mitarbeiter kann somit bestätigen, dass sie die Person sind, welche die Karten reserviert hat. Dieses Beispiel entspricht zwar nicht mehr der Realität, weil die Sie die Reservierung höchstwahrscheinlich auf ihren Smartphone haben, aber in meinen Augen erfüllt es den Zweck Ihnen das Prinzip der Authentifizierung näher zu bringen.
+
+\subsubsection{Autorisierung}
+
+Sie sind aufgrund gewisser Voraussetzungen \textbf{autorisiert} Dinge zu tun. Mit einem Führerschein ist es Ihnen zum Beispiel erlaubt ein Fahrzeug der entsprechenden Klasse zu lenken. Das Beispiel Führerschein trifft aber sowohl auf die \textbf{Authentifizierung} als auch auf die \textbf{Autorisierung} zu. Auf der Vorderseite stehen Ihre persönlichen Daten, wie Name und Geburtsdatum mit denen man Sie authentifizieren kann und auf der Rückseite die Fahrzeugklassen, welche Sie lenken dürfen.
+
+\break
+\break
+\break 
+\subsection{Möglichkeiten der Authentifizierung bei einem MSSQL Server}
+
+Der SQL-Server bietet mehrere Möglichkeiten der Authentifizierung an. 
+
+\subsubsection{Windows-Authentifizierung}
+
+Hier übernimmt der Datenbank-Server die Login Daten von Windows, was aber nicht bedeutet, dass jeder Benutzer der Domäne des Betriebssystems auf die Datenbank Zugriffen kann. Das muss der Datenbankadministrator explizit erlauben. Indem er Ihnen die dazugehörigen Zugriffsrechte erteilt. Diese Rechte können nicht nur einem einzelnem Benutzer sondern einer ganzen Gruppe von Benutzern erteilt werden. Sollte keine Differenzierung der Benutzer notwendig sein, kann das die Administration vereinfachen. Sollte sich aber ein Benutzer anmelden der autorisiert ist und in einer Gruppe sein die ebenfalls autorisiert ist kann das zu Problemen führen
+
+\subsubsection{SQL-Server-Authentifizierung}
+
+Hier haben wir das klassische Beispiel eines Logins. Hier werden auf den Server Benutzerkonten angelegt. Damit Sie sich einloggen können, benötigen Sie einen Benutzernamen und ein dazugehöriges Passwort. De Administrator der Datenbank wird Sie zunächst als Benutzer anlegen indem er Ihnen einen Benutzernamen und ein Passwort gibt. Für die Passwörter gibt es drei optionale Richtlinien.
+\begin{itemize}
+\item "Benutzer muss das Kennwort bei der nächsten Anmeldung ändern"
+\item " {Ablauf des Kennworts erzwingen}"
+\begin{itemize}
+\item Hier läuft das Passwort nach einer gewissen Zeit ab
+\end{itemize}
+\item "Kennwortrichtlinie erzwingen"
+\begin{itemize}
+\item Hier wird eingestellt, dass das Kennwort eine gewisse Länge und Komplexität haben muss.
+\end{itemize}
+\end{itemize}
+\begin{flushleft}
+
+\subsubsection{Nachteile der SQL-Server-Authentifizierung}
+
+Nachdem sich der Benutzer über einen Benutzernamen und Passwort für Windows verfügt muss er sich dann noch mit seinen SQL Server Logindaten anmelden. Es kann für den Benutzer schwierig sein sich mehrere Benutzernamen und Passwörter zu merken
+
+
+
+Windows bietet mehrere Kennwortrichtlinien an die beim SQL Server nicht verfügbar sind.
+\break
+
+
+Bei der SQL-Server-Authentifizierung kann das "Kerberos" Protokoll nicht verwendet werden.
+Das Kerberos Protokoll authentifiziert den Server gegenüber den Client und umgekehrt. Der Kerberos Server steht quasi zwischen Client und Server und authentifiziert sich auch Beiden gegenüber
+\break
+
+
+Der größte Nachteil ist aber, dass zum Zeitpunkt des Logins eine Verbindung zum Netzwerk herrschen muss, weil die verschlüsselten Logindaten über das Netzwerk übertragen werden.
+Es gibt Anwendungen die sich automatisch Verbinden und somit die Logindaten auf dem Client speichern. Das ist ein weiterer Angriffspunkt und stellt ein hohes Risiko in Sachen der Sicherheit dar.
+\break
+\break
+\break
+\subsubsection{Vorteile der SQL-Server-Authentifizierung}
+
+Es ermöglicht den SQL Server mehrere Betriebssysteme zu unterstützen. Das heißt es muss nicht jeder Benutzer durch eine Windows Domäne authentifiziert werden.
+\break
+
+
+Außerdem ist es Benutzern möglich sich von nicht vertrauenswürdigen oder unbekannten Domänen anzumelden.
+\break
+
+
+Drittens wird den SQL Server erlaubt eine ältere Anwendung und Anwendungen von Drittanbietern zu unterstützen.
+\break
+
+
+Webbasierte Anwendungen bei denen sich Benutzer ihre eigene Identität erstellen, werden ebenfalls unterstützt
+\break
+
+
+Und zu guter Letzt wird es Softwareentwicklern ermöglicht Berechtigungen auf Basis von bekannten, voreingestellten SQL Server Logins auf die Anwendung zu verteilen. 
+
+\subsubsection{gemischter Modus}
+
+Hier werden die beiden anderen Möglichkeiten vereint. Wenn der Benutzer, wegen seiner Betriebssystemanmeldung keine Zugriffsrechte auf den Datenbankserver, kann er sich mit dem SQL-Server-Login anmelden
+
+Insbesondere gilt das für:
+\begin{itemize}
+\item Zugriff auf einen Web-Server
+\item gerouteter Zugriff über das Wide Area Network(WAN)
+\item Andere Betriebssysteme als Windows
+\end{itemize}
+
+
+
+
+\section{Backups}
+
+Ich nehme an Sie haben bereits von Backups gehört. Backups sind Verfahren, welche Daten an einen anderen Ort kopieren. Sie werden aber Backups eher als Sicherungskopien kennen. Sicherungskopien werden zu einem fixem Zeitpunkt, je nach \textbf{Backupstrategie} unterschiedlich. Sollte es zu einem Fehler am Server kommen, zum Beispiel eine kaputte Festplatte, werden diese Sicherungskopien des damaligen Datenbestand eingespielt, die Änderungen ab der Sicherungskopien sind weck. 
+
+\subsection{Full Backup}
+
+Wie der Name schon vermuten lässt, wir hier ein Backup auf den gesamten Datenbestand gemacht. Das ist einfach zu realsieren hat aber den großen Nachteil, dass die benötigte Zeit ziemlich groß ist. Aufgrund des hohen Zeitauswands werden die Full Backups in eher größeren Zeitabständen realisiert.
+
+\section{Recovery}
+
+Im Prinzip gibt es mehrere Fehler die meinen Datenbestand gefährden können. Für jeden dieser Fälle gibt es eine Methode wie Sie wieder zu Ihren korrekten Datenbestand kommen können.
+
+
+\subsection{Transaktionsfehler}
+Dieser Fehler tritt auf, wenn eine Transaktion nicht ordnungsgemäß beendet wird. Daraus folgt, dass ich einen inkonsistenten Datenbestand habe. Das heißt, dass mein Datenbestand unvollständig bzw. fehlerhaft ist. So etwas passiert nicht nur in der Welt der Datenbanken. Überlegen Sie einmal wie oft Programme bei Ihnen am Computer oder auf den Smartphone abstürzen oder nicht so funktionieren wie Sie das gerne hätten. Im Prinzip wird hier auch eine Funktion nicht richtig ausgeführt.
+
+\subsubsection{Mögliche Ursachen}
+
+Ein Transaktionsfehler kann auftreten, wenn es zu einer Endlosschleife, Laufzeitfehlern, Abbruch des Programms, Überschreitungen einer CPU-Zeitgrenze, kein Speicherplatz bei Schreiboperationen, oder bei Deadlocks.
+
+Bei Endlosschleifen wird, wie der Name schon verrät, ein Teil des Programms endlos abgearbeitet, somit kann die Transaktion bzw. das Programm nicht beendet werden. 
+Laufzeitfehler sind Fehler, die im Betrieb des Programms auftreten, wie z.B. Divisionen durch 0 oder Zugriff auf nicht existierenden Speicher. 
+Ein Prozess kann nur eine gewisse Zeit von der CPU verarbeitet werden. Wird dieser Prozess zu lange von der CPU verarbeitet, wird irgendwann angenommen, dass dieses Prozess nicht verarbeitet werden kann und es kommt zu einer CPU-Zeitüberschreitung.
+Deadlocks werden im späteren Verlauf noch genauer beschreiben. Kurz gesagt tritt ein Deadlock ein, wenn zwei Benutzer zur selben Zeit auf eine Ressource zugreifen und sie mindestens ein Benutzer verändern möchte.
+
+\subsubsection{Fehlerbehandlung}
+
+Prinzipiell muss ich nur die fehlerhafte Transaktion rückgängig machen. Dies lässt sich durch die Transaction Recovery erreichen.Danach sollten sich die Datenbank wieder in dem Zustand befinden indem sie vor der Transaktion war.
+
+\subsection{Mediumsfehler}
+
+Bei einem Mediumsfehler,auch Speicherfehler oder Hard-Crash genannt, sind die Daten unlesbar oder physisch zerstört worden. Die Daten sind nun also nicht mehr verfügbar. 
+
+\subsubsection{Mögliche Ursachen}
+
+Zu einem Hard-Crash kann es kommen, wenn die Festplatte direkt mit einer Magnetplatte in Berührung kommt, fehlerhafte Dateiverwaltung des Betriebssystems, Katastrophenfälle wie z.B. Brand oder Erdbeben, Fehlverhalten des Disk-Controllers, formatieren der Festplatte und löschen der Daten.
+
+\subsubsection{Fehlerbehandlung}
+
+Es wird eine Archive Recovery, Media Recovery oder eine Disaster Recovery durchgeführt.
+Es wird ein Sicherungsstand eingespielt und alle Transaktionen die nach dem Zeitpunkt des Sicherungsstandes durchgeführt wurden, müssen nochmal ausgeführt werden.
+
+\subsection{Systemfehler}
+
+Systemfehler werden auch als Soft-Crash bezeichnet. Ein Soft-Crash tritt ein, wenn der Transaktionsmonitor nicht richtig beendet worden ist. Daraus folgen mehrere Transaktionsfehler.
+
+\subsubsection{Mögliche Ursachen}
+
+Zu Soft-Chrashes kommt es, wenn der Strom ausfällt, die Inhalte aus dem Hauptspeicher verloren gehen, Betriebssystemfehler oder Beenden des Transaktionsmonitor durch den Benutzer
+
+\subsubsection{Fehlerbehandlung}
+
+Um wieder auf einen konsistenten Datenbestand zu kommen muss man eine Crash-Recovery durchführen. Die Transaktionen die beim Systemfehler aktiv waren, müssen zurückgesetzt werden.
+
+\subsection{Backward Recovery} 
+
+Jetzt wo Sie die drei Fehlerarten kennen, sollten Sie auch wissen, dass es zwei Möglichkeiten der Recovery gibt. Die erste Möglichkeita ist die \textbf{Backward Recovery}. In diesem Begriff sind die Transaction Recovery und die Crash Recovery zusammengefasst. 
+Es gibt außerdem auch zwei Techniken für die \textbf{Backward Recovery}.
+
+\subsubsection{Logging in Undo-Logs}
+
+Bevor die Daten verändert werden, werden die Daten kopiert, diese Kopie bezeichnet man als Before-Image.  damit für jede Operation der alte Wert bekannt ist. Um die Transaktion wieder rückgängig zu machen, wird diese Datei von Hinten bis Vorne durchgegangen um wieder auf die alten Daten zu kommen. Das Before Image wird dann in ein Undo-Log geschrieben, damit für jede Operation der alte Wert bekannt ist. Um die Daten wieder herzustellen wird dieses Undo-Log von hinten nach vorne durchgearbeitet um alle Änderungen wieder rückgängig zu machen.
+
+\subsubsection{Verzögertes Update}
+
+Es wird nicht direkt auf die Daten zugegriffen sondern auf eine Kopie dieser Daten. Die Daten werden erst geändert nachdem die Transaktion beendet ist. Sollte man die Daten wieder zurücksetzen wollen, muss man nur die Kopie löschen´.
+
+\subsubsection{Undo-Logdatei}
+
+In der Praxis wird eher das Logging oder auch Journaling in Undo-Logs angewendet. 
+In solch einer Undo-Logdatei sind mindestens der Beginn der Transaktion und deren Identifikation, Kennzeichnung der Operatoren, Identifikation der Transaktion und der Daten, das Before Image der veränderten Daten und das Ende er Transaktion mit deren Identifikation. Zusätzlich können noch Benutzeridentifikation, Workspacebezeichnung, Programmname, Datum und Uhrzeit enthalten sein. 
+Mit Kennzeichnung der Operation ist gemeint ob man Daten aufnehmen, löschen oder ändern möchte. Wenn man aufnehmen möchte reicht nur die Identifikation der Daten zu Protokollieren. Mit Workspacebezeichnung ist der Name des Computers.
+
+Die Undo-Informationen müssen auch nur bis zum erfolgreichen Ende einer Transaktion aufgehoben werden. In der Regel wird das Undo-Log aber fortlaufend geführt und ab einen bestimmten Zeitpunkt dann komplett gelöscht. 
+
+Bei der Transaction Revocery müssen Sie das Undo-Log bis zum Beginkennzeichen der Transaktion durch gehen und bei der Crash Recovery müssen Sie bis zum Anfang des Undo-Logs lesen, weil sich immer noch Before-Images einer Transaktion im Undo-Log sein könnten. Um nicht immer die ganze Datei lesen zu müssen werden in regelmäßigen Zeitabständen Checkpoints eingeführt. Somit wird die Datei in abschnitte geteilt und ich kann nun in einem begrenzten Abschnitt durchsuchen. Alle Identifikationen von aktiven Transaktionen werden zu diesem Zeitpunkt gespeichert. Das Logfile wird bis zum jüngsten Checkpunkt gelesen. Alle Transaktionen ohne Endmarke werden mittels Before-Image rückgänig gemacht. Vom Checkpoint weiter richtiung Anfang der Datei werden jetzt alle Transaktionen rückgängig gemacht die im Checkpoint angegeben sind und die ebenfalls ohne Endmarke darstehen.
+
+\subsection{Forward Recovery}
+
+Ähnlich wie bei der Backwar Recovery werden hier Kopien der veränderten Daten in eine Log-Datei eingetragen. Die Kopien heißen hier After-Image und die Log-Dateien Redo-Log. Das Redo-Log wird von Anfang bis Ende gelesen um alle Änderungen durch beendete Transaktion nachvollziehen zu können. Auch die Informationen im Redo-Log sind die Selben wie im Undo-Log nur das man hier die bei der Operation Löschen nur die Identifikation der Daten speichern.
+
+Redo-Informationen muss ich nur bis zum Zeitpunkt der Sicherungskopie oder Backup-Copy aufgehoben werden. Backup-Copies können aus Gründen der Verfügbarkeit oder, weil man diese eher in größeren Abständen macht sehr groß werden und somit auch die Redo-Logs. Glücklicherweise können die Redo-Logs durch Dienstprogramme kompimiert werden. Dabei werden nur die jüngsten erfolgreichen Änerungen gespeichert um einen schnelleren Wiederanlauf zu garantieren.
+
+\subsubsection{Alternativen}
+
+Man könnte auch gespiegelte Platten, gespiegelte Datenbanken oder RAID-Systeme verwenden und sich damit die Archive Recovery zu sparen.
+
+RAID-Systeme organisieren mehrere pyische Massenspeicher zu einer Pation. RAID Systeme habeneine höhere Ausfallsicherhiet und einen größeren Datendurchsatz als normale Speichermedien. 
+Die Daten werden paralell geändert und doppelt gespeichert, das hat den Vorteil, dass man einen schnelleren Wiederanlauf des Systems hat. Der Nachteil hingegen ist, dass man große Hardwarekapazitäten benötigt und das natürlich ziemlich kostenintensiv ist. Im Katastrophenfall würde auch das doppelte Halten der Daten nichts bringen, weil sie trotzdem zerstört werden würden.
+\end{flushleft}

@@ -1,0 +1,68 @@
+\chapter{Social Media Integration (FM)}
+\label{cha:Social Media Integration}
+
+Even before the development and publication of the World Wide Web, the Bulletin Board System (BBS) was developed and distributed as early as 1978, whereby it probably counts as the oldest social network, if email is not taken into account. With the BBS, users were able to exchange software, read news and communicate with each other. In the same year, the Multi-User Dungeon or Multi-User Domain (MUD) was released for the first time, allowing users to chat and role-play in a virtual world. In both networks, the entire exchange of messages was exclusively text-based. In the following years, networks like the Usenet were published as an extension of the BBS to exchange news and articles. In addition, the Whole Earth 'Lectronic Link and General Electric Network for Information Exchange were founded to exchange data with other users on a more scientific basis\footnote{\label{rg_history}\url{https://www.researchgate.net/publication/303216233_The_history_of_social_media_and_its_impact_on_business}}.
+
+Whether these networks and systems are considered social networks or not depends on the definition. There is no general and universal definition of social networks or social media. There are numerous approaches to how these are to be defined\footnote{\url{https://www.researchgate.net/publication/313480568_Social_Media_Impact_on_Business_Evaluation}}. Equally, there is no consensus regarding the definitions and delimitation of social media and social networks.
+
+Among the largest social networks and media at the moment are Facebook, YouTube and WhatsApp\footnote{\url{https://www.statista.com/statistics/272014/global-social-networks-ranked-by-number-of-users/}}, all three with rather different application purposes. Each network has the potential to attract billions of users with well-planned campaigns and on-platform features. The biggest key factor is how well posts are designed in terms of content and appearance to maximize conversation rates and expand the user base of our virtual museum\footnoteref{rg_history}.
+
+\section{Capabilities of the Toolkit}
+
+As a result of the software evaluation in 3.1, we decided to use Wordpress as toolkit for the implementation of the virtual museum. Due to the high modularity of Wordpress, a large number of ready-to-use plugins can be utilized to provide the following features.
+
+
+\section{Use Cases}
+In the following list, we propose major thoughts and suggestions which we consider to enrich the project through social media and networks. Most of it was contributed by the popular and influential blog "Shout Me Loud" \footnote{\url{https://www.shoutmeloud.com/benefits-of-using-social-media-for-business.html}} as well as the article "The history of social media and its impact on business" \footnoteref{rg_history} by Simeon O. Edosomwan, North Dakota State University. Some of the following ideas require the creation of an official eMuseum account on different social platforms like Facebook, Instagram and Twitter. These official accounts will be managed by the operators, administrators or dedicated staff, focusing on marketing and support via social media engagement.
+
+
+\subsection{Sharing Exhibits} \label{social_sharing}
+
+One of the most powerful marketing tools are the active users themselves. Museum visitors should be able to share exhibits and content with their friends, family or acquaintances. To give users the idea of sharing and make it as easy as possible, buttons are provided on the website.
+
+According to the paper "The Like Economy: Social Buttons and the DataIntensive Web" from 2013\footnote{\url{https://www.annehelmond.nl/wordpress/wp-content/uploads/2011/04/GerlitzHelmond-HitLinkLikeShare.pdf}}, in which more than 420 URLs were analysed to see whether they had Share, Like and Tweet buttons and how often they were actually used, 41\% of all websites examined had a Like button, 64\% had a Share button and 68\% had a Tweet button. The paper states, that the more controversial, debatable and media-rich a website is, the higher is the probability that the website is actually shared by visitors.
+
+After careful research, we decided to use the Wordpress plugin developed and powered by AddThis\footnote{\url{https://de.wordpress.org/plugins/addthis/}}. AddThis is a free and widely used service, with over 15 million websites using the complete solution acquired by Oralce\footnote{\url{https://www.addthis.com/about/}} \footnote{\url{https://www.addthis.com/about/oracle/}}. It allows website operators to easily integrate share buttons, display them in different styles and formats, position them based on the website content and provide operators with detailed statistics regarding the behaviour of their visitors.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/dpa_wp_example.PNG}
+\caption{This screenshot is taken from the official Wordpress plugin browser, and shows an example blog that uses the AddThis share buttons.}
+\label{fig::cl_homepage}
+\end{figure}
+
+\subsection{(Autonomous and) Regular Posting of Exhibits} \label{socail_regular}
+
+One way to generate regular content, is to publish existing exhibits from our virtual museum on platforms such as Twitter, Facebook and Instagram. The objective is to receive maximum engagement from users, to attract new users to follow us and visiting our museum. Certain actions should be followed to improve the chances of success of this strategy:
+
+\begin{itemize}
+    \item Consistency in posting frequency. According to Jon Simpson, part of the Forbes Agency Council, regular content publishing is fundamental to the success of any business trying to grow through social networking\footnote{\url{https://www.forbes.com/sites/forbesagencycouncil/2019/02/11/why-content-consistency-is-key-to-your-marketing-strategy/}}. Jon believes that by testing out various posting frequencies and analyzing traffic data on a regular basis for weeks, is the best way to determine the ideal posting schedule. The well-known SEO and marketing specialist Neil Patel, recommends for our objective of maximum engagement 1-5 posts or tweets per day\footnote{\url{https://www.forbes.com/sites/neilpatel/2016/09/12/how-frequently-you-should-post-on-social-media-according-to-the-pros/#2357596f240f}}.
+    \item In order to prevent low-quality or rather uninteresting exhibits from being published on our social media, a solution would be to prefer  items with a higher number of views. Future developers of the virtual museum might implement a counter for each exhibit, how often it is visited by museum visitors. This counter could be used to determine, for example, that only those exhibits are posted on our social media that are in the better 50\% of views.
+\end{itemize}
+
+\noindent Ideally, the entire job should be automated in order to keep the work for the operators as low as possible. Major social networks such as Facebook, Twitter and Instagram offer pre-built SDKs for PHP, allowing future developers to implement automated posting of relevant exhibits in four steps:
+
+\begin{enumerate}
+    \item Create a PHP script that implements the Wordpress API to access content and exhibits of the virtual museum.
+    \item Query the database using Wordpress, and select a random exhibit, narrowing the relevance by views.
+    \item Post the queried exhibit on including images, texts and institution using social media SDKs.
+    \item Setup a automated cron job to run the script once to five times a day.
+\end{enumerate}
+
+\noindent Alternatively, ready-made plugins for Wordpress can also be used, although querying the relevant data is more difficult, since the plugin must be able to support custom data structures. 
+
+On the other hand, manual publishing has the advantage, that operators can better estimate which exhibits are currently relevant, resulting in a higher conversation rate. Some exhibits are not ideal for all social networks, for example, if no picture is available. If operators post manually, they can limit the selection of social networks.
+
+\subsection{Providing Support} \label{social_support}
+
+Another way, the platform could benefit from an integration of social media, would be to provide support for users. Visitors should be able to get in touch with museum operators or a dedicated support team. With the appropriate implementation, quick answers and professional support, a close connection between user and platform can be established. On the other hand, using the wrong approach can suggest lack of professionalism and have a negative impact on the user experience. 
+
+One way to implement this, would be by installing the "Smart Floating Action Buttons" plugin, from the public Wordpress plugin repository\footnote{\url{https://wordpress.org/plugins/buttonizer-multifunctional-button/}}. An action button is displayed in the lower right corner of the screen, which displays a menu when the user clicks on it. The administrator of the platform is able to configure various actions within this menu, like direct messaging via social networks, the execution of JavaScript code or redirection to other websites. Part of the supported social networks are Twitter Direct Message, Facebook Messenger, Skype, WhatsApp, email and many more. 
+
+
+In addition, Gitter would also be a useful social network to provide assistance to users\footnote{\url{https://gitter.im/}}. Gitter is a project led and operated by Troupe Technology Ltd, a subsidiary of GitLab Ltd\footnote{\url{https://about.gitlab.com/blog/2017/03/15/gitter-acquisition/}}. It can be identified as a social medium, originally used to help GitHub users to chat and communicate with each other\footnote{\url{https://web.archive.org/web/20150208202330/http://research.gigaom.com/2014/01/gitter-is-a-github-based-chat-tool-for-developers/}}. Users and organizations are able to create public and private chat rooms in which, for example, help and support can be offered for museum visitors.
+
+\subsection{Embed Feeds of the Exhibit Authors} \label{social_feeds}
+
+Almost all exhibits are added by schools, museums, organisations or similar institutions. These often have their own websites and presences on social networks. In order to promote and offer advantages to them, it would be possible to link them via our platform or to embed their Instagram or Twitter feed directly into the developed platform.
+

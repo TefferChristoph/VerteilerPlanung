@@ -1,0 +1,26 @@
+﻿<Window x:Class="VerteilerPlanungAPI.HouseDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VerteilerPlanungAPI"
+        mc:Ignorable="d"
+        Title="HouseDialog" Height="320" Width="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="373*"/>
+            <ColumnDefinition Width="53*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="50,60,0,0" Name="tblZip"  Text="PLZ" VerticalAlignment="Top" Width="67" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="50,105,0,0" Name="tblCity" Text="Stadt" VerticalAlignment="Top" Width="77" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="50,150,0,0" Name="tblAddress" Text="Addresse" VerticalAlignment="Top" Width="77" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="50,195,0,0" Name="tblFloors" Text="Stockwerke" VerticalAlignment="Top" Width="77" />
+
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="118,60,0,0" Name="tbZip" VerticalAlignment="Top" Width="230" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="118,105,0,0" Name="tbCity" VerticalAlignment="Top" Width="230" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="118,150,0,0" Name="tbAddress" VerticalAlignment="Top" Width="230" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="118,195,0,0" Name="tbFloors" VerticalAlignment="Top" Width="50"/>
+
+        <Button Height="23" Name="btnAddHouse" Content="Haus hinzufügen" Margin="118,240,0,0" VerticalAlignment="Top" Click="btnAddHouse_Click" IsDefault="True"/>
+    </Grid>
+</Window>

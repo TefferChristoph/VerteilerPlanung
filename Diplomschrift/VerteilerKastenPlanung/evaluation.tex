@@ -1,0 +1,119 @@
+\chapter{Software Evaluation (AN)}
+\label{cha:Requirements Analysis}
+The evaluation of all technologies is an essential part of the project. It should ensure that all components work together optimally and meet all required criteria.
+
+In order to be able to carry out the evaluation, the technologies that are suitable for implementation are first determined. A list of all criteria is also drawn up and prioritised. Afterwards the technologies are compared with the criteria to determine the two most optimal technologies. These technologies are then tested within the "Testing within Virtual Environment\ref{cha:Testing within Virtual Environment}".
+
+
+\section{Different Approaches}
+
+There are many approaches to implementing a virtual museum. As already mentioned in the paragraph "Target Condition of the Completed Virtual Museum \ref{target_condition}" a web-based solution is best for our purposes.
+
+To implement this, one or more tools (also called Content Management Systems - CMS) should be used, which can be extended by self-programmed elements if required. To develop a complete tool by ourselves would exceed the time frame of the project, which is why existing content management systems should be used.
+
+These can be roughly divided into two categories:
+\begin{itemize}
+	\item systems that are already tailored to a specific purpose
+	\item unspecified systems whose purpose is to simplify the development of a website
+\end{itemize}
+
+\vspace{0.5cm}
+
+Since the following point "Testing within Virtual Environment\ref{cha:Testing within Virtual Environment}" is intended to test two tools in practice, and since it is difficult to compare tailored systems and unspecified systems with each other, both categories are treated separately in the following points of the evaluation and the best systems are used for the practical tests.
+
+\section{Tailored Systems}
+
+\subsection{Available Tools}
+
+\subsubsection{Omeka Classic}
+Omeka Classic is an open-source content management system developed by the company Omeka. It was created with a focus on publishing digital collections and creating exhibits\footnote{https://omeka.org/classic/}. To adapt the system to special needs Omeka Classic offers the possibility to be extended with themes and plugins, if necessary.
+
+\subsubsection{Omeka S}
+Omeka S is the second open-source content management system developed by Omeka, besides Omeka Classic. It was developed for the publication of collections of cultural heritage items\footnote{https://omeka.org/s/}. Additionally it offers the possibility to publish several websites, which all access the same back-end \footnote{https://omeka.org/s/docs/user-manual/sites/}. If required, Omeka S can be extended with themes and modules.
+
+\subsubsection{Collective Access}
+Collective Access is an open-source software that enables the creation, publication and management of online museums and archive collections. It offers the possibility to display the data privately (only with a user's access data) or publicly, on an optional front-end. To create complex collections, elements can be placed in hierarchical relationships\footnote{https://www.collectiveaccess.org/features}.
+
+\subsubsection{Collection Space}
+Collection Space is an open-source content management system that was primarily developed for the management of museum collections. It contains a variety of element types for storing data and tools for searching and editing the existing data\footnote{https://www.collectionspace.org/}. Collection Space has different versions in which these element types and tools differ. This should help to adapt the system more precisely to the conditions. There is also the Collection Space "Core" version, which contains all existing elements and tools\footnote{https://www.collectionspace.org/demo/}.
+
+\subsubsection{My Tours App}
+My Tours App is a system primarily designed for the development of an app with included tours. However, it also has the option of a website that contains all the tour data. The exact design of the apps and websites is developed individually for each client by the contractor, all exhibition data is processed via a web interface. The app was developed in 18 different languages\footnote{https://www.mytoursapp.com/platform/}.
+
+\subsection{Knock out criteria}
+KO criteria are those requirements that a system must meet in order to be considered. If a system cannot meet one or more of the requirements, it is excluded from the evaluation at this point and is not used for the benefit analysis.
+
+Our KO-criteria have been developed through the criteria for the diploma thesis and through regular discussions with our client.
+
+\subsubsection{Support for mobil devices and desktop pc's}
+It should be possible to access the virtual museum both on site and from home. Therefore it is important to support systems with different screen sizes. A specially adapted display for mobile devices has become a standard nowadays, but it cannot be assumed that it is supported by every tool.
+
+\subsubsection{Connection between real and virtual world}
+<todo>
+
+\subsubsection{Accessible for outsiders}
+In order to make the museum available to outsiders, it must be possible to access the exhibits without access data.
+
+\subsubsection{Social Media connection}
+In order to give users the opportunity to share the museum and stay informed about new developments, social media platforms will be integrated into the project. The motivations and implementation will be discussed in more detail in the topic "Social Media Integration \ref{cha:Social Media Integration}".
+
+\subsubsection{Implementable as a virtual museum}
+The paragraph "Target Condition of the Completed Virtual Museum \ref{target_condition}" defines how the virtual representation of a museum could look like. This criterion is intended to ensure that the tool provides a conversion possibility in this or a similar way.
+
+\subsection{Evaluation by KO-criteria}
+The tables below show a comparison of tools and KO criteria. Below the tables are explanations of the values in the tables.
+
+\vspace{0.5cm}
+\begin{tabular}[h]{l|c|c|c}
+     & \textbf{Omeka Classic} & \textbf{Omeka S} & \textbf{Collective Access}\\
+     \hline
+    \textbf{PC and mobile device support} & yes & yes & yes\\
+     \hline
+    \textbf{Connection real - virtual world} & yes & yes & yes\\
+     \hline
+    \textbf{Accessible for outsiders} & yes & yes & yes\\
+     \hline
+    \textbf{Social Media connection} & yes & yes & yes\\
+     \hline
+    \textbf{Virtual museum} & yes & yes & yes\\
+\end{tabular}
+
+
+\vspace{0.5cm}
+\begin{tabular}[h]{l|c|c}
+     & \textbf{My Tours App} & \textbf{Collection Space}\\
+     \hline
+    \textbf{PC and mobile device support} & yes & no\\
+     \hline
+    \textbf{Connection real - virtual world} & yes & yes\\
+     \hline
+    \textbf{Accessible for outsiders} & yes & no\\
+     \hline
+    \textbf{Social Media Connection} & no & yes\\
+     \hline
+    \textbf{Virtual museum} & yes & no\\
+\end{tabular}
+
+\subsubsection{Omeka Classic}
+\begin{itemize}
+\item \textbf{Sozial Media connection:} Omeka Classic does not provide a function or plugin to integrate social media into the site. Therefore this would have to be implemented in a plugin created especially for this purpose.
+\item \textbf{Virtual Museum:} In Omeka Classic, exhibits can be organized in collections and have an order within those collections. These collections are visible to the user and it is possible to switch from one exhibit to the one before or after by simply using next and privious buttons. This way rooms can be organized as collections and the order can be used to create a tour through the room.
+\end{itemize}
+
+\subsubsection{Omeka S}
+\begin{itemize}
+    \item \textbf{Social Media connection:} Omeka S does not provide a function or module to integrate social media into the site. Therefore a module would have to be programmed to implement this. An other option would be to use a custom HTML filed. Omeka S supports to insert a field for own HTML Elements on pages.
+    \item \textbf{Virtual Museum:} In Omeka S there is the function of collections. In these collections elements can be stored in a certain order. In addition, several web pages can be created. Collections can be used to represent rooms and the order of the exhibits in the collection can reflect the structure of the room. Different web pages can be used to display the different physical museums.
+\end{itemize}
+
+\subsubsection{Collectiv Access}
+\begin{itemize}
+    \item \textbf{Virtual Museum:} Collectiv Access offers the possibility to display elements in unsorted lists. These collections can be used to represent physical spaces of the museum in a viral way.
+\end{itemize}
+
+\subsection{final evaluation}
+After the evaluation according to the KO criteria, three tools remain. These differ only slightly in handling and features. A bigger difference is the extension, because both versions of Omeka support an extension by plugins/modules. Collective Access only supports extension via API.
+
+Another big difference is that Omkea S has the ability to create multiple pages. This can be used as an outline help for the virtual presentation, for which otherwise an extension would have to be developed. Since the virtual representation is a very important requirement for the finished application, Omeka S is used as a tool for the item "Testing within Virtual Environment \ref{cha:Testing within Virtual Environment}".
+
+\section{Unspecified Systems}
